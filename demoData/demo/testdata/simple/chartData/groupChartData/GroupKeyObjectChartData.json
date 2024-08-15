@@ -1,0 +1,52 @@
+{
+	"result": {
+		"Critical": {
+			"boothCount": 79,
+			"constituency": "Colonelganj"
+		},
+		"Critical/Vulnerable": {
+			"boothCount": 4,
+			"constituency": "Colonelganj"
+		},
+		"Vulnerable": {
+			"boothCount": 0,
+			"constituency": "Colonelganj"
+		},
+		"Normal": {
+			"boothCount": 240,
+			"constituency": "Colonelganj"
+		},
+		"Critical": {
+			"boothCount": 67,
+			"constituency": "Katra Bazar"
+		},
+		"Critical/Vulnerable": {
+			"boothCount": 14,
+			"constituency": "Katra Bazar"
+		},
+		"Vulnerable": {
+			"boothCount": 7,
+			"constituency": "Katra Bazar"
+		},
+		"Normal": {
+			"boothCount": 234,
+			"constituency": "Katra Bazar"
+		},
+		"Critical": {
+			"boothCount": 61,
+			"constituency": "Tarabganj"
+		},
+		"Critical/Vulnerable": {
+			"boothCount": 14,
+			"constituency": "Tarabganj"
+		},
+		"Vulnerable": {
+			"boothCount": 0,
+			"constituency": "Tarabganj"
+		},
+		"Normal": {
+			"boothCount": 212,
+			"constituency": "Tarabganj"
+		}
+	}
+}

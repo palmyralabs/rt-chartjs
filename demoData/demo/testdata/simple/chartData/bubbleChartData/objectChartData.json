@@ -1,0 +1,28 @@
+{
+    "result": {
+        "one": {
+            "value": 15,
+            "average": 13,
+            "top": 20,
+            "month": "January"
+        },
+        "two": {
+            "value": 16,
+            "average": 25,
+            "top": 25,
+            "month": "February"
+        },
+        "three": {
+            "value": 21,
+            "average": 12,
+            "top": 16,
+            "month": "March"
+        },
+        "four": {
+            "value": 14,
+            "average": 12,
+            "top": 10,
+            "month": "April"
+        }
+    }
+}

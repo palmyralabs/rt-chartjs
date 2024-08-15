@@ -1,0 +1,24 @@
+{
+    "result": {
+        "January": {
+            "value": 15,
+            "average": 12,
+            "top": 26
+        },
+        "February": {
+            "value": 21,
+            "average": 12,
+            "top": 12
+        },
+        "March": {
+            "value": 20,
+            "average": 20,
+            "top": 20
+        },
+        "April": {
+            "value": 12,
+            "average": 14,
+            "top": 20
+        }
+    }
+}

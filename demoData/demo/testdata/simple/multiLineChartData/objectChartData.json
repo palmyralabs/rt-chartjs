@@ -1,0 +1,24 @@
+{
+    "result": {
+        "one": {
+            "value": 5,
+            "min": 4,
+            "month": "January"
+        },
+        "two": {
+            "value": 10,
+            "min": 8,
+            "month": "February"
+        },
+        "three": {
+            "value": 8,
+            "min": 6,
+            "month": "March"
+        },
+        "four": {
+            "value": 4,
+            "min": 5,
+            "month": "April"
+        }
+    }
+}

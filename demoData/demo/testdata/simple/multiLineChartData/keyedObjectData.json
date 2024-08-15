@@ -1,0 +1,20 @@
+{
+    "result": {
+        "January": {
+            "value": 7,
+            "min": 5
+        },
+        "February": {
+            "value": 5,
+            "min": 7
+        },
+        "March": {
+            "value": 8,
+            "min": 3
+        },
+        "April": {
+            "value": 4,
+            "min": 2
+        }
+    }
+}

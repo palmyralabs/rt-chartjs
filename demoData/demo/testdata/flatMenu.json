@@ -1,0 +1,164 @@
+{
+    "result": [
+        {
+            "id": 1,
+            "name": "Home",
+            "code": "home"
+        },
+        {
+            "id": 2,
+            "name": "Initial Setup",
+            "code": "initialSetup"
+        },
+        {
+            "id": 3,
+            "name": "Chart Examples",
+            "code": "simpleChart",
+            "children": "4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15"
+        },
+        {
+            "id": 4,
+            "name": "Bar Chart",
+            "code": "simpleChart/barChart",
+            "parent": 2
+        },
+        {
+            "id": 6,
+            "name": "Line Chart",
+            "code": "simpleChart/lineChart",
+            "parent": 2
+        },
+        {
+            "id": 7,
+            "name": "Multi Line Chart",
+            "code": "simpleChart/multiLineChart",
+            "parent": 2
+        },
+        {
+            "id": 8,
+            "name": "Doughnut Chart",
+            "code": "simpleChart/doughnutChart",
+            "parent": 2
+        },
+        {
+            "id": 9,
+            "name": "Pie Chart",
+            "code": "simpleChart/pieChart",
+            "parent": 2
+        },
+        {
+            "id": 10,
+            "name": "Polar Area Chart",
+            "code": "simpleChart/polarAreaChart",
+            "parent": 2
+        },
+        {
+            "id": 11,
+            "name": "Radar Chart",
+            "code": "simpleChart/radarChart",
+            "parent": 2
+        },
+        {
+            "id": 12,
+            "name": "Grouped Bar Chart",
+            "code": "simpleChart/groupedBarChart",
+            "parent": 2
+        },
+        {
+            "id": 13,
+            "name": "Stacked Bar Chart",
+            "code": "simpleChart/stackedBarChart",
+            "parent": 2
+        },
+        {
+            "id": 14,
+            "name": "Scatter Chart",
+            "code": "simpleChart/scatterChart",
+            "parent": 2
+        },
+        {
+            "id": 15,
+            "name": "Bubble Chart",
+            "code": "simpleChart/bubbleChart",
+            "parent": 2
+        },
+        {
+            "id": 16,
+            "name": "Chart Types",
+            "code": "chartTypes",
+            "children": "18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28"
+        },
+        {
+            "id": 17,
+            "name": "Chart Scale",
+            "code": "chartScale"
+        },
+        {
+            "id": 18,
+            "name": "Bar Chart",
+            "code": "chartTypes/props/barChart",
+            "parent": 16
+        },
+        {
+            "id": 19,
+            "name": "Line Chart",
+            "code": "chartTypes/props/lineChart",
+            "parent": 16
+        },
+        {
+            "id": 20,
+            "name": "Multi Line Chart",
+            "code": "chartTypes/props/multiLineChart",
+            "parent": 16
+        },
+        {
+            "id": 21,
+            "name": "Doughnut Chart",
+            "code": "chartTypes/props/doughnutChart",
+            "parent": 16
+        },
+        {
+            "id": 22,
+            "name": "Pie Chart",
+            "code": "chartTypes/props/pieChart",
+            "parent": 16
+        },
+        {
+            "id": 23,
+            "name": "Polar Area Chart",
+            "code": "chartTypes/props/polarAreaChart",
+            "parent": 16
+        },
+        {
+            "id": 24,
+            "name": "Radar Chart",
+            "code": "chartTypes/props/radarChart",
+            "parent": 16
+        },
+        {
+            "id": 25,
+            "name": "Grouped Bar Chart",
+            "code": "chartTypes/props/groupedBarChart",
+            "parent": 16
+        },
+        {
+            "id": 26,
+            "name": "Stacked Bar Chart",
+            "code": "chartTypes/props/stackedBarChart",
+            "parent": 16
+        },
+        {
+            "id": 27,
+            "name": "Scatter Chart",
+            "code": "chartTypes/props/scatterChart",
+            "parent": 16
+        },
+        {
+            "id": 28,
+            "name": "Bubble Chart",
+            "code": "chartTypes/props/bubbleChart",
+            "parent": 16
+        }
+    ],
+    "status": 200
+}
