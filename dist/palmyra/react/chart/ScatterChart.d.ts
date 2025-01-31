@@ -12,6 +12,7 @@ interface IScatterChartOptions extends IRemoteDataChartOptions<'scatter'> {
         xLabel?: String;
         yLabel?: String;
         sourceType?: RawDataType;
+        metadata?: string[];
     };
 }
 declare const ScatterChart: (props: IScatterChartOptions) => import("react/jsx-runtime").JSX.Element;

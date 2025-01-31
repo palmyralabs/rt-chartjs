@@ -12,7 +12,8 @@ interface IScatterChartOptions extends IRemoteDataChartOptions<'scatter'> {
         yKey?: AttributeAccessor,
         xLabel?: String,
         yLabel?: String,
-        sourceType?: RawDataType
+        sourceType?: RawDataType,
+        metadata?: string[];
     }
 }
 
