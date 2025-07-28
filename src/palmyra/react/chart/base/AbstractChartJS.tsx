@@ -3,7 +3,7 @@ import { ChartJsType } from '@palmyralabs/chartjs-utils';
 import { Chart as ChartRef, ChartType, ChartOptions, registerables, TimeScale } from 'chart.js';
 import { MutableRefObject, useImperativeHandle, useMemo, useRef } from 'react';
 import { Chart } from 'react-chartjs-2';
-import { useClickListener } from '../../../chartjs/ChartEventListener';
+import { useAreaSelectListener, useClickListener } from '../../../chartjs/ChartEventListener';
 import { generateDataPipeLine } from '../../../chartjs/DataPipeLineGenerator';
 import { IAbstractChartOptions, IChartJS } from '../Types';
 
@@ -93,6 +93,9 @@ function AbstractChartJS<T extends ChartType,>(props: IAbstractChartOptions<T>) 
 
     const chart = useMemo(() => {
         const props = getProps();
+         if (props.onAreaSelect) {
+            useAreaSelectListener(props.type, options, plugins, props.onAreaSelect);
+        }
         return <Chart type={ChartJSTypeRegistry[props.type]} ref={chartRef}
             options={options} plugins={plugins} onClick={onClick}
             data={data} height={getHeight()} />

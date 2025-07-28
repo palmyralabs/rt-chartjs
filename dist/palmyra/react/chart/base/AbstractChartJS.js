@@ -1,11 +1,11 @@
-import { jsx as u } from "react/jsx-runtime";
-import { Chart as C, registerables as y, TimeScale as R } from "chart.js";
-import { useRef as s, useImperativeHandle as L, useMemo as P } from "react";
-import { Chart as S } from "react-chartjs-2";
-import { useClickListener as A } from "../../../chartjs/ChartEventListener.js";
-import { generateDataPipeLine as D } from "../../../chartjs/DataPipeLineGenerator.js";
-C.register(...y, R);
-const B = {
+import { jsx as o } from "react/jsx-runtime";
+import { Chart as S, registerables as y, TimeScale as A } from "chart.js";
+import { useRef as l, useImperativeHandle as C, useMemo as L } from "react";
+import { Chart as R } from "react-chartjs-2";
+import { useClickListener as P, useAreaSelectListener as D } from "../../../chartjs/ChartEventListener.js";
+import { generateDataPipeLine as B } from "../../../chartjs/DataPipeLineGenerator.js";
+S.register(...y, A);
+const k = {
   Line: "line",
   MultiLine: "line",
   AreaChart: "line",
@@ -19,7 +19,7 @@ const B = {
   Radar: "radar",
   Scatter: "scatter",
   GroupedScatter: "scatter"
-}, k = {
+}, v = {
   responsive: !0,
   maintainAspectRatio: !1,
   plugins: {
@@ -28,9 +28,9 @@ const B = {
     }
   }
 };
-function M(t) {
-  const o = [], n = D(t), l = t.chartOptions || { ...k }, f = t.plugins || o, e = s(null), p = n(t.data), h = t.chartRef || s(null);
-  L(h, () => ({
+function O(t) {
+  const f = [], n = B(t), i = t.chartOptions || { ...v }, c = t.plugins || f, e = l(null), p = n(t.data), h = t.chartRef || l(null);
+  C(h, () => ({
     clear: () => {
       e.current && e.current.clear();
     },
@@ -45,8 +45,8 @@ function M(t) {
         return;
       const a = e.current;
       if (r) {
-        const c = n(r);
-        i && i(c), a.data = c, a.update();
+        const u = n(r);
+        s && s(u), a.data = u, a.update();
       }
     }
   }), [e]);
@@ -56,23 +56,23 @@ function M(t) {
   function d() {
     return "350px";
   }
-  const { onClick: g, setData: i } = A(t.type, t, t.dataPipeLine, e), b = P(() => {
+  const { onClick: g, setData: s } = P(t.type, t, t.dataPipeLine, e), b = L(() => {
     const r = m();
-    return /* @__PURE__ */ u(
-      S,
+    return r.onAreaSelect && D(r.type, i, c, r.onAreaSelect), /* @__PURE__ */ o(
+      R,
       {
-        type: B[r.type],
+        type: k[r.type],
         ref: e,
-        options: l,
-        plugins: f,
+        options: i,
+        plugins: c,
         onClick: g,
         data: p,
         height: d()
       }
     );
   }, []);
-  return /* @__PURE__ */ u("div", { className: "palmyra-chart-container-wrapper", children: b });
+  return /* @__PURE__ */ o("div", { className: "palmyra-chart-container-wrapper", children: b });
 }
 export {
-  M as AbstractChartJS
+  O as AbstractChartJS
 };

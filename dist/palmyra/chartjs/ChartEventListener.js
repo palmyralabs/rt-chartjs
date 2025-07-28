@@ -1,12 +1,12 @@
 import { useRef as m } from "react";
 import { getDatasetAtEvent as g, getElementsAtEvent as p, getElementAtEvent as C } from "react-chartjs-2";
-import { AreaSelectDrag as v } from "./plugins/AreaSelectDrag.js";
-import { getPointConverter as A } from "./DataConverterFactory.js";
+import { getPointConverter as v } from "./DataConverterFactory.js";
+import { AreaSelectDrag as A } from "./plugins/AreaSelectDrag.js";
 function E(n) {
   return n.length > 0;
 }
 const L = (n, r, i, o) => {
-  o != null && (i.push(v), r.plugins.selectdrag = {
+  o != null && (i.push(A), r.plugins.selectdrag = {
     enabled: !0,
     onSelectComplete: (s) => {
       o(s);
@@ -17,7 +17,7 @@ const L = (n, r, i, o) => {
     return {};
   const { accessorOptions: s, onPointClick: u } = r, l = m(null), f = (t, e, c) => {
     if (t.length) {
-      var a = A(n);
+      var a = v(n);
       return a(l.current, s, i, e, c);
     }
   };
