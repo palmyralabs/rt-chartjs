@@ -1,6 +1,5 @@
 import { RawDataType, StyleOptions } from '@palmyralabs/chartjs-utils';
 import { IRemoteDataChartOptions } from './Types';
-
 interface IStackedBarChartOptions extends IRemoteDataChartOptions<'bar'> {
     styleOptions?: never;
     accessorOptions?: never;

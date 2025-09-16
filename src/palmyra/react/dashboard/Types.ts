@@ -1,5 +1,5 @@
 import { ChartStoreFactory } from "@palmyralabs/palmyra-wire"
-import { MutableRefObject } from "react"
+import { RefObject } from "react"
 
 interface refreshOptions {
     interval: number,
@@ -9,8 +9,8 @@ interface refreshOptions {
 interface IDashboardOptions {
     children?: any,
     refreshOptions?: refreshOptions,
-    storeFactory?: ChartStoreFactory<any>,
-    dashboardRef?: MutableRefObject<IDashBoard>
+    storeFactory?: ChartStoreFactory<any, any>,
+    dashboardRef?: RefObject<IDashBoard>
 }
 
 interface IDashBoard {

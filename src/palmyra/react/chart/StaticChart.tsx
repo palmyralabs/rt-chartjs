@@ -8,7 +8,7 @@ import { IAbstractChart, IStaticChartOptions } from "./Types";
 const StaticChart = <T extends ChartType>(props: IStaticChartOptions<T>) => {
 
     const currentRef = useRef<IAbstractChart>(null);
-    const chartRef = useRef<any>();    
+    const chartRef = useRef<any>(null);    
 
     useImperativeHandle(currentRef, () => {
         return {

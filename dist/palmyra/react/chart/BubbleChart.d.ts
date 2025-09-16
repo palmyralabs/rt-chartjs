@@ -1,6 +1,5 @@
 import { AttributeAccessor, IDatasetStyleOptions, RawDataType } from '@palmyralabs/chartjs-utils';
 import { IRemoteDataChartOptions } from './Types';
-
 interface IBubbleChartOptions extends IRemoteDataChartOptions<'bubble'> {
     styleOptions?: never;
     accessorOptions?: never;

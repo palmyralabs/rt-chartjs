@@ -1,6 +1,6 @@
 import { ChartData, ChartOptions, ChartType } from "chart.js"
 import { IChartOptions } from "../../chartjs/Types"
-import { MutableRefObject } from "react"
+import { RefObject } from "react"
 import { ChartStoreFactory, IEndPoint, IEndPointOptions } from "@palmyralabs/palmyra-wire";
 import { ChartJsType } from "@palmyralabs/chartjs-utils";
 
@@ -25,13 +25,13 @@ interface storeBacked {
 }
 
 interface IAbstractChartOptions<T extends ChartType> extends IChartOptions {
-    chartRef?: MutableRefObject<IChartJS>
+    chartRef?: RefObject<IChartJS>
     chartOptions?: ChartOptions<T>
     data?: any
 }
 
 interface RemoteQueryOptions {
-    storeFactory?: ChartStoreFactory<any>,
+    storeFactory?: ChartStoreFactory<any, any>,
     endPoint: IEndPoint,
     endPointVars?: IEndPointOptions
     filter?: any
@@ -55,7 +55,7 @@ interface ISimpleChartOptions<T extends ChartType> extends IRemoteDataChartOptio
 
 interface IStaticChartOptions<T extends ChartType> extends IAbstractChartOptions<T> {
     type: ChartJsType
-    chartRef?: MutableRefObject<IStaticChart<T>>,
+    chartRef?: RefObject<IStaticChart<T>>,
     chartData: ChartData
 }
 

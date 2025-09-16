@@ -1,24 +1,24 @@
-const L = (y, l, a, e, b) => {
-  const { x: t, y: u, r } = n(l);
-  var d = {};
-  return e.map((v) => {
-    var { index: f, datasetIndex: g } = v, K = y.datasets[g], m = K.label, x = K.data[f];
-    d[m] = {
-      [t]: x.x,
-      [u]: x.y,
-      [r]: x.r
+const f = (e, t, y, a, n) => {
+  const { x: b, y: d, r: K } = s(t);
+  var l = {};
+  return a.map((o) => {
+    var { index: u, datasetIndex: v } = o, x = e.datasets[v], i = x.label, r = x.data[u];
+    l[i] = {
+      [b]: r.x,
+      [d]: r.y,
+      [K]: r.r
     };
-  }), d;
+  }), l;
 };
-function n(y) {
-  const l = (y == null ? void 0 : y.xLabel) || "name", a = (y == null ? void 0 : y.xKey) || "x", e = (y == null ? void 0 : y.yKey) || "y", b = (y == null ? void 0 : y.rKey) || "r";
-  return e instanceof Array && console.error("BubbleChart: yKey should be string only, not an array " + y.yKey), {
-    x: a,
-    y: e,
-    r: b,
-    label: l
+function s(e) {
+  const t = e?.xLabel || "name", y = e?.xKey || "x", a = e?.yKey || "y", n = e?.rKey || "r";
+  return a instanceof Array && console.error("BubbleChart: yKey should be string only, not an array " + e.yKey), {
+    x: y,
+    y: a,
+    r: n,
+    label: t
   };
 }
 export {
-  L as getBubblePointData
+  f as getBubblePointData
 };

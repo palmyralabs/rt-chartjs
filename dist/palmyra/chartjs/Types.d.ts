@@ -1,6 +1,5 @@
 import { ChartJsType, ConverterOptions, StyleOptions } from '@palmyralabs/chartjs-utils';
 import { InteractionItem } from 'chart.js';
-
 type converter = (d: any) => any;
 type IgetPointData = (data: any, options: ConverterOptions, dataPipeLine: DataPipeLine, element: InteractionItem[], elements: InteractionItem[]) => Record<string, any>;
 type PostProcessor<T> = (data: T) => T;

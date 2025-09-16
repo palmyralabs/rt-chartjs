@@ -2,8 +2,8 @@ import { jsx as e } from "react/jsx-runtime";
 import { useRef as r, useImperativeHandle as i } from "react";
 import o from "../ErrorBoundary.js";
 import { AbstractChartJS as c } from "./base/AbstractChartJS.js";
-const u = (t) => {
-  const a = r(null), n = r();
+const m = (t) => {
+  const a = r(null), n = r(null);
   return i(a, () => ({
     toggleLegend() {
     },
@@ -27,5 +27,5 @@ const u = (t) => {
   ) }) });
 };
 export {
-  u as StaticChart
+  m as StaticChart
 };

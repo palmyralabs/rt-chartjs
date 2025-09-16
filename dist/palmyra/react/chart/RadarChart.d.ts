@@ -1,6 +1,5 @@
 import { AttributeAccessor, IDatasetStyleOptions, RawDataType } from '@palmyralabs/chartjs-utils';
 import { IRemoteDataChartOptions } from './Types';
-
 interface IRadarChartOptions extends IRemoteDataChartOptions<'radar'> {
     styleOptions?: never;
     accessorOptions?: never;

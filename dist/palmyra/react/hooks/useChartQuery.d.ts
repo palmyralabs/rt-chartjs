@@ -1,6 +1,5 @@
 import { IEndPointOptions } from '@palmyralabs/palmyra-wire';
 import { RemoteQueryOptions } from '../chart/Types';
-
 interface Callback {
     onData: (d: any) => void;
     onError?: () => void;

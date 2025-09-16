@@ -1,9 +1,8 @@
-import { MutableRefObject } from 'react';
+import { RefObject } from 'react';
 import { IChartJS, IRemoteDataChartOptions } from './Types';
 import { IDatasetStyleOptions, RawDataType } from '@palmyralabs/chartjs-utils';
-
 interface ILineChartOptions extends IRemoteDataChartOptions<'line'> {
-    chartRef?: MutableRefObject<IChartJS>;
+    chartRef?: RefObject<IChartJS>;
     styleOptions?: never;
     accessorOptions?: never;
     style?: IDatasetStyleOptions;

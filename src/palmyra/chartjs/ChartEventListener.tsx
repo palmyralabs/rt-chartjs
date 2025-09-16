@@ -1,5 +1,5 @@
 import { Chart, ChartType as ChartJsType, InteractionItem, Plugin } from "chart.js";
-import { MouseEventHandler, MutableRefObject, useRef } from "react";
+import { MouseEventHandler, RefObject, useRef } from "react";
 import { getDatasetAtEvent, getElementAtEvent, getElementsAtEvent } from "react-chartjs-2";
 import { getPointConverter } from "./DataConverterFactory";
 import { DataPipeLine, IChartOptions } from "./Types";
@@ -30,7 +30,7 @@ const useAreaSelectListener = (chartType: string, chartOptions: IChartOptions,
 }
 
 const useClickListener = (chartType: string, props: IChartOptions,
-    dataPipeLine: DataPipeLine, chartRef: MutableRefObject<Chart>): ListenerResult => {
+    dataPipeLine: DataPipeLine, chartRef: RefObject<Chart>): ListenerResult => {
     if (!props.onPointClick)
         return {};
 

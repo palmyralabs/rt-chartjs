@@ -4,7 +4,7 @@ import { IDashBoard, IDashboardOptions } from "./Types";
 
 
 const Dashboard = (props: IDashboardOptions) => {
-    const currentRef = props.dashboardRef || useRef<IDashBoard>();
+    const currentRef = props.dashboardRef || useRef<IDashBoard>(null);
     // TODO - get chartstorefactory from props  or  context
     const storeFactory = props.storeFactory;
 

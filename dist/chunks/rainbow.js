@@ -1,12 +1,12 @@
-function xt(t) {
-  const r = (t == null ? void 0 : t.xKey) || "name", n = (t == null ? void 0 : t.yKey) || "value", i = n instanceof Array ? n : [n];
+function kt(t) {
+  const r = t?.xKey || "name", n = t?.yKey || "value", i = n instanceof Array ? n : [n];
   return {
     xKey: j(r),
     yKeys: W(i)
   };
 }
-function kt(t) {
-  const r = (t == null ? void 0 : t.xKey) || "name", n = (t == null ? void 0 : t.yKey) || "value", i = n instanceof Array ? n : [n], a = t.xKeyLabelMap ? (e) => t.xKeyLabelMap[e] || e : (e) => e;
+function vt(t) {
+  const r = t?.xKey || "name", n = t?.yKey || "value", i = n instanceof Array ? n : [n], a = t.xKeyLabelMap ? (e) => t.xKeyLabelMap[e] || e : (e) => e;
   return {
     xKey: j(r),
     xLabelAccessor: a,
@@ -31,7 +31,7 @@ function j(t) {
   throw console.error("Invalid attribute accessor", t), Error("Invalid Attribute Accessor  ");
 }
 function Nt(t) {
-  const r = (t == null ? void 0 : t.xLabel) || (t == null ? void 0 : t.xKey) || "name", n = (t == null ? void 0 : t.yLabel) || (t == null ? void 0 : t.yKey) || "value", i = n instanceof Array || typeof n == "object" ? n : [n];
+  const r = t?.xLabel || t?.xKey || "name", n = t?.yLabel || t?.yKey || "value", i = n instanceof Array || typeof n == "object" ? n : [n];
   return {
     xLabel: r,
     yLabels: i
@@ -58,7 +58,7 @@ const X = (t, r) => {
     return X(a, r[i]);
   }
 }, et = (t) => t.indexOf(".") >= 1;
-function q(t, r, n) {
+function A(t, r, n) {
   t.prototype = r.prototype = n, n.constructor = t;
 }
 function L(t, r) {
@@ -68,7 +68,7 @@ function L(t, r) {
 }
 function w() {
 }
-var b = 0.7, m = 1 / b, p = "\\s*([+-]?\\d+)\\s*", $ = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)\\s*", c = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)%\\s*", st = /^#([0-9a-f]{3,8})$/, ot = new RegExp(`^rgb\\(${p},${p},${p}\\)$`), lt = new RegExp(`^rgb\\(${c},${c},${c}\\)$`), ut = new RegExp(`^rgba\\(${p},${p},${p},${$}\\)$`), ht = new RegExp(`^rgba\\(${c},${c},${c},${$}\\)$`), ct = new RegExp(`^hsl\\(${$},${c},${c}\\)$`), gt = new RegExp(`^hsla\\(${$},${c},${c},${$}\\)$`), z = {
+var p = 0.7, m = 1 / p, d = "\\s*([+-]?\\d+)\\s*", $ = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)\\s*", c = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)%\\s*", st = /^#([0-9a-f]{3,8})$/, ot = new RegExp(`^rgb\\(${d},${d},${d}\\)$`), ht = new RegExp(`^rgb\\(${c},${c},${c}\\)$`), ut = new RegExp(`^rgba\\(${d},${d},${d},${$}\\)$`), lt = new RegExp(`^rgba\\(${c},${c},${c},${$}\\)$`), ct = new RegExp(`^hsl\\(${$},${c},${c}\\)$`), gt = new RegExp(`^hsla\\(${$},${c},${c},${$}\\)$`), z = {
   aliceblue: 15792383,
   antiquewhite: 16444375,
   aqua: 65535,
@@ -218,7 +218,7 @@ var b = 0.7, m = 1 / b, p = "\\s*([+-]?\\d+)\\s*", $ = "\\s*([+-]?(?:\\d*\\.)?\\
   yellow: 16776960,
   yellowgreen: 10145074
 };
-q(w, O, {
+A(w, O, {
   copy(t) {
     return Object.assign(new this.constructor(), this, t);
   },
@@ -247,35 +247,35 @@ function F() {
 }
 function O(t) {
   var r, n;
-  return t = (t + "").trim().toLowerCase(), (r = st.exec(t)) ? (n = r[1].length, r = parseInt(r[1], 16), n === 6 ? B(r) : n === 3 ? new s(r >> 8 & 15 | r >> 4 & 240, r >> 4 & 15 | r & 240, (r & 15) << 4 | r & 15, 1) : n === 8 ? k(r >> 24 & 255, r >> 16 & 255, r >> 8 & 255, (r & 255) / 255) : n === 4 ? k(r >> 12 & 15 | r >> 8 & 240, r >> 8 & 15 | r >> 4 & 240, r >> 4 & 15 | r & 240, ((r & 15) << 4 | r & 15) / 255) : null) : (r = ot.exec(t)) ? new s(r[1], r[2], r[3], 1) : (r = lt.exec(t)) ? new s(r[1] * 255 / 100, r[2] * 255 / 100, r[3] * 255 / 100, 1) : (r = ut.exec(t)) ? k(r[1], r[2], r[3], r[4]) : (r = ht.exec(t)) ? k(r[1] * 255 / 100, r[2] * 255 / 100, r[3] * 255 / 100, r[4]) : (r = ct.exec(t)) ? J(r[1], r[2] / 100, r[3] / 100, 1) : (r = gt.exec(t)) ? J(r[1], r[2] / 100, r[3] / 100, r[4]) : z.hasOwnProperty(t) ? B(z[t]) : t === "transparent" ? new s(NaN, NaN, NaN, 0) : null;
+  return t = (t + "").trim().toLowerCase(), (r = st.exec(t)) ? (n = r[1].length, r = parseInt(r[1], 16), n === 6 ? B(r) : n === 3 ? new s(r >> 8 & 15 | r >> 4 & 240, r >> 4 & 15 | r & 240, (r & 15) << 4 | r & 15, 1) : n === 8 ? v(r >> 24 & 255, r >> 16 & 255, r >> 8 & 255, (r & 255) / 255) : n === 4 ? v(r >> 12 & 15 | r >> 8 & 240, r >> 8 & 15 | r >> 4 & 240, r >> 4 & 15 | r & 240, ((r & 15) << 4 | r & 15) / 255) : null) : (r = ot.exec(t)) ? new s(r[1], r[2], r[3], 1) : (r = ht.exec(t)) ? new s(r[1] * 255 / 100, r[2] * 255 / 100, r[3] * 255 / 100, 1) : (r = ut.exec(t)) ? v(r[1], r[2], r[3], r[4]) : (r = lt.exec(t)) ? v(r[1] * 255 / 100, r[2] * 255 / 100, r[3] * 255 / 100, r[4]) : (r = ct.exec(t)) ? J(r[1], r[2] / 100, r[3] / 100, 1) : (r = gt.exec(t)) ? J(r[1], r[2] / 100, r[3] / 100, r[4]) : z.hasOwnProperty(t) ? B(z[t]) : t === "transparent" ? new s(NaN, NaN, NaN, 0) : null;
 }
 function B(t) {
   return new s(t >> 16 & 255, t >> 8 & 255, t & 255, 1);
 }
-function k(t, r, n, i) {
+function v(t, r, n, i) {
   return i <= 0 && (t = r = n = NaN), new s(t, r, n, i);
 }
 function Y(t) {
   return t instanceof w || (t = O(t)), t ? (t = t.rgb(), new s(t.r, t.g, t.b, t.opacity)) : new s();
 }
-function dt(t, r, n, i) {
+function bt(t, r, n, i) {
   return arguments.length === 1 ? Y(t) : new s(t, r, n, i ?? 1);
 }
 function s(t, r, n, i) {
   this.r = +t, this.g = +r, this.b = +n, this.opacity = +i;
 }
-q(s, dt, L(w, {
+A(s, bt, L(w, {
   brighter(t) {
     return t = t == null ? m : Math.pow(m, t), new s(this.r * t, this.g * t, this.b * t, this.opacity);
   },
   darker(t) {
-    return t = t == null ? b : Math.pow(b, t), new s(this.r * t, this.g * t, this.b * t, this.opacity);
+    return t = t == null ? p : Math.pow(p, t), new s(this.r * t, this.g * t, this.b * t, this.opacity);
   },
   rgb() {
     return this;
   },
   clamp() {
-    return new s(y(this.r), y(this.g), y(this.b), A(this.opacity));
+    return new s(y(this.r), y(this.g), y(this.b), q(this.opacity));
   },
   displayable() {
     return -0.5 <= this.r && this.r < 255.5 && -0.5 <= this.g && this.g < 255.5 && -0.5 <= this.b && this.b < 255.5 && 0 <= this.opacity && this.opacity <= 1;
@@ -283,21 +283,21 @@ q(s, dt, L(w, {
   hex: D,
   // Deprecated! Use color.formatHex.
   formatHex: D,
-  formatHex8: bt,
+  formatHex8: pt,
   formatRgb: G,
   toString: G
 }));
 function D() {
   return `#${f(this.r)}${f(this.g)}${f(this.b)}`;
 }
-function bt() {
+function pt() {
   return `#${f(this.r)}${f(this.g)}${f(this.b)}${f((isNaN(this.opacity) ? 1 : this.opacity) * 255)}`;
 }
 function G() {
-  const t = A(this.opacity);
+  const t = q(this.opacity);
   return `${t === 1 ? "rgb(" : "rgba("}${y(this.r)}, ${y(this.g)}, ${y(this.b)}${t === 1 ? ")" : `, ${t})`}`;
 }
-function A(t) {
+function q(t) {
   return isNaN(t) ? 1 : Math.max(0, Math.min(1, t));
 }
 function y(t) {
@@ -314,21 +314,21 @@ function Z(t) {
   if (t instanceof w || (t = O(t)), !t) return new u();
   if (t instanceof u) return t;
   t = t.rgb();
-  var r = t.r / 255, n = t.g / 255, i = t.b / 255, a = Math.min(r, n, i), e = Math.max(r, n, i), o = NaN, l = e - a, h = (e + a) / 2;
-  return l ? (r === e ? o = (n - i) / l + (n < i) * 6 : n === e ? o = (i - r) / l + 2 : o = (r - n) / l + 4, l /= h < 0.5 ? e + a : 2 - e - a, o *= 60) : l = h > 0 && h < 1 ? 0 : o, new u(o, l, h, t.opacity);
+  var r = t.r / 255, n = t.g / 255, i = t.b / 255, a = Math.min(r, n, i), e = Math.max(r, n, i), o = NaN, h = e - a, l = (e + a) / 2;
+  return h ? (r === e ? o = (n - i) / h + (n < i) * 6 : n === e ? o = (i - r) / h + 2 : o = (r - n) / h + 4, h /= l < 0.5 ? e + a : 2 - e - a, o *= 60) : h = l > 0 && l < 1 ? 0 : o, new u(o, h, l, t.opacity);
 }
-function pt(t, r, n, i) {
+function dt(t, r, n, i) {
   return arguments.length === 1 ? Z(t) : new u(t, r, n, i ?? 1);
 }
 function u(t, r, n, i) {
   this.h = +t, this.s = +r, this.l = +n, this.opacity = +i;
 }
-q(u, pt, L(w, {
+A(u, dt, L(w, {
   brighter(t) {
     return t = t == null ? m : Math.pow(m, t), new u(this.h, this.s, this.l * t, this.opacity);
   },
   darker(t) {
-    return t = t == null ? b : Math.pow(b, t), new u(this.h, this.s, this.l * t, this.opacity);
+    return t = t == null ? p : Math.pow(p, t), new u(this.h, this.s, this.l * t, this.opacity);
   },
   rgb() {
     var t = this.h % 360 + (this.h < 0) * 360, r = isNaN(t) || isNaN(this.s) ? 0 : this.s, n = this.l, i = n + (n < 0.5 ? n : 1 - n) * r, a = 2 * n - i;
@@ -340,13 +340,13 @@ q(u, pt, L(w, {
     );
   },
   clamp() {
-    return new u(Q(this.h), N(this.s), N(this.l), A(this.opacity));
+    return new u(Q(this.h), N(this.s), N(this.l), q(this.opacity));
   },
   displayable() {
     return (0 <= this.s && this.s <= 1 || isNaN(this.s)) && 0 <= this.l && this.l <= 1 && 0 <= this.opacity && this.opacity <= 1;
   },
   formatHsl() {
-    const t = A(this.opacity);
+    const t = q(this.opacity);
     return `${t === 1 ? "hsl(" : "hsla("}${Q(this.h)}, ${N(this.s) * 100}%, ${N(this.l) * 100}%${t === 1 ? ")" : `, ${t})`}`;
   }
 }));
@@ -360,32 +360,32 @@ function R(t, r, n) {
   return (t < 60 ? r + (n - r) * t / 60 : t < 180 ? n : t < 240 ? r + (n - r) * (240 - t) / 60 : r) * 255;
 }
 const mt = Math.PI / 180, wt = 180 / Math.PI;
-var _ = -0.14861, I = 1.78277, P = -0.29227, E = -0.90649, v = 1.97294, T = v * E, U = v * I, V = I * P - E * _;
+var _ = -0.14861, I = 1.78277, P = -0.29227, E = -0.90649, x = 1.97294, T = x * E, U = x * I, V = I * P - E * _;
 function $t(t) {
-  if (t instanceof d) return new d(t.h, t.s, t.l, t.opacity);
+  if (t instanceof b) return new b(t.h, t.s, t.l, t.opacity);
   t instanceof s || (t = Y(t));
-  var r = t.r / 255, n = t.g / 255, i = t.b / 255, a = (V * i + T * r - U * n) / (V + T - U), e = i - a, o = (v * (n - a) - P * e) / E, l = Math.sqrt(o * o + e * e) / (v * a * (1 - a)), h = l ? Math.atan2(o, e) * wt - 120 : NaN;
-  return new d(h < 0 ? h + 360 : h, l, a, t.opacity);
+  var r = t.r / 255, n = t.g / 255, i = t.b / 255, a = (V * i + T * r - U * n) / (V + T - U), e = i - a, o = (x * (n - a) - P * e) / E, h = Math.sqrt(o * o + e * e) / (x * a * (1 - a)), l = h ? Math.atan2(o, e) * wt - 120 : NaN;
+  return new b(l < 0 ? l + 360 : l, h, a, t.opacity);
 }
 function g(t, r, n, i) {
-  return arguments.length === 1 ? $t(t) : new d(t, r, n, i ?? 1);
+  return arguments.length === 1 ? $t(t) : new b(t, r, n, i ?? 1);
 }
-function d(t, r, n, i) {
+function b(t, r, n, i) {
   this.h = +t, this.s = +r, this.l = +n, this.opacity = +i;
 }
-q(d, g, L(w, {
+A(b, g, L(w, {
   brighter(t) {
-    return t = t == null ? m : Math.pow(m, t), new d(this.h, this.s, this.l * t, this.opacity);
+    return t = t == null ? m : Math.pow(m, t), new b(this.h, this.s, this.l * t, this.opacity);
   },
   darker(t) {
-    return t = t == null ? b : Math.pow(b, t), new d(this.h, this.s, this.l * t, this.opacity);
+    return t = t == null ? p : Math.pow(p, t), new b(this.h, this.s, this.l * t, this.opacity);
   },
   rgb() {
     var t = isNaN(this.h) ? 0 : (this.h + 120) * mt, r = +this.l, n = isNaN(this.s) ? 0 : this.s * r * (1 - r), i = Math.cos(t), a = Math.sin(t);
     return new s(
       255 * (r + n * (_ * i + I * a)),
       255 * (r + n * (P * i + E * a)),
-      255 * (r + n * (v * i)),
+      255 * (r + n * (x * i)),
       this.opacity
     );
   }
@@ -396,7 +396,7 @@ function rt(t, r) {
     return t + n * r;
   };
 }
-function vt(t, r) {
+function xt(t, r) {
   var n = r - t;
   return n ? rt(t, n > 180 || n < -180 ? n - 360 * Math.round(n / 360) : n) : tt(isNaN(t) ? r : t);
 }
@@ -405,18 +405,18 @@ function K(t, r) {
   return n ? rt(t, n) : tt(isNaN(t) ? r : t);
 }
 function nt(t) {
-  return function r(n) {
+  return (function r(n) {
     n = +n;
     function i(a, e) {
-      var o = t((a = g(a)).h, (e = g(e)).h), l = K(a.s, e.s), h = K(a.l, e.l), at = K(a.opacity, e.opacity);
-      return function(x) {
-        return a.h = o(x), a.s = l(x), a.l = h(Math.pow(x, n)), a.opacity = at(x), a + "";
+      var o = t((a = g(a)).h, (e = g(e)).h), h = K(a.s, e.s), l = K(a.l, e.l), at = K(a.opacity, e.opacity);
+      return function(k) {
+        return a.h = o(k), a.s = h(k), a.l = l(Math.pow(k, n)), a.opacity = at(k), a + "";
       };
     }
     return i.gamma = r, i;
-  }(1);
+  })(1);
 }
-nt(vt);
+nt(xt);
 var it = nt(K);
 it(g(-100, 0.75, 0.35), g(80, 1.5, 0.8));
 it(g(260, 0.75, 0.35), g(80, 1.5, 0.8));
@@ -427,11 +427,11 @@ function Kt(t) {
   return M.h = 360 * t - 100, M.s = 1.5 - 1.5 * r, M.l = 0.8 - 0.9 * r, M + "";
 }
 export {
-  Nt as A,
-  j as a,
-  Kt as b,
-  Mt as g,
-  xt as l,
-  S as s,
-  kt as x
+  kt as K,
+  vt as b,
+  Kt as g,
+  Nt as l,
+  S as u,
+  Mt as x,
+  j as y
 };

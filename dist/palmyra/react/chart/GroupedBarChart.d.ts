@@ -1,6 +1,5 @@
 import { RawDataType, StyleOptions } from '@palmyralabs/chartjs-utils';
 import { IRemoteDataChartOptions } from './Types';
-
 interface IGroupedBarChartOptions extends IRemoteDataChartOptions<'bar'> {
     styleOptions?: never;
     accessorOptions?: never;

@@ -1,6 +1,5 @@
 import { AttributeAccessor, IDatasetStyleOptions, RawDataType } from '@palmyralabs/chartjs-utils';
 import { IRemoteDataChartOptions } from './Types';
-
 interface IPieChartOptions extends IRemoteDataChartOptions<'pie'> {
     styleOptions?: never;
     accessorOptions?: never;

@@ -1,7 +1,7 @@
 
 import { ChartJsType } from '@palmyralabs/chartjs-utils';
 import { Chart as ChartRef, ChartType, ChartOptions, registerables, TimeScale } from 'chart.js';
-import { MutableRefObject, useImperativeHandle, useMemo, useRef } from 'react';
+import { RefObject, useImperativeHandle, useMemo, useRef } from 'react';
 import { Chart } from 'react-chartjs-2';
 import { useAreaSelectListener, useClickListener } from '../../../chartjs/ChartEventListener';
 import { generateDataPipeLine } from '../../../chartjs/DataPipeLineGenerator';
@@ -45,7 +45,7 @@ function AbstractChartJS<T extends ChartType,>(props: IAbstractChartOptions<T>) 
 
     const data = pipeLine(props.data);
 
-    const currentRef: MutableRefObject<IChartJS> = props.chartRef || useRef<IChartJS>(null);
+    const currentRef: RefObject<IChartJS> = props.chartRef || useRef<IChartJS>(null);
 
     useImperativeHandle(currentRef, () => {
         return {

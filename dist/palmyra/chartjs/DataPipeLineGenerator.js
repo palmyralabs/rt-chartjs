@@ -1,554 +1,546 @@
-import { x as N, A as E, g as M, a as k, b as R } from "../../chunks/rainbow.js";
-const A = (a) => {
-  const t = N(a), s = t.xKey, n = t.yKeys, e = t.xLabelAccessor, { yLabels: o } = E(a);
-  return (l) => {
-    var u = {
+import { b as L, l as E, x as V, y as S, g as R } from "../../chunks/rainbow.js";
+const x = (a) => {
+  const r = L(a), o = r.xKey, t = r.yKeys, e = r.xLabelAccessor, { yLabels: s } = E(a);
+  return (c) => {
+    var l = {
       labels: [],
       keys: [],
       datasets: []
     };
-    if (l == null)
-      return u;
-    var c = {};
-    return n.map((r, p) => {
-      const d = r.ref, y = M(o, d, p);
-      var i = { key: d, label: y, data: [] };
-      c[p] = i, u.datasets[p] = i;
-    }), l.map((r, p) => {
-      var d = s.accessor(r);
-      const y = e(d);
-      u.labels.push(y), u.keys.push(d), n.map((i, h) => {
-        var O = c[h];
-        O.data[p] = i.accessor(r);
+    if (c == null)
+      return l;
+    var u = {};
+    return t.map((n, y) => {
+      const p = n.ref, d = V(s, p, y);
+      var b = { key: p, label: d, data: [] };
+      u[y] = b, l.datasets[y] = b;
+    }), c.map((n, y) => {
+      var p = o.accessor(n);
+      const d = e(p);
+      l.labels.push(d), l.keys.push(p), t.map((b, h) => {
+        var O = u[h];
+        O.data[y] = b.accessor(n);
       });
-    }), u;
+    }), l;
   };
 }, $ = (a) => {
-  const { xKey: t, xLabelAccessor: s } = N(a), { xLabel: n, yLabels: e } = E(a);
-  return (o) => {
-    var l = {
+  const { xKey: r, xLabelAccessor: o } = L(a), { xLabel: t, yLabels: e } = E(a);
+  return (s) => {
+    var c = {
       labels: [],
       keys: [],
       datasets: []
     };
-    if (o == null)
-      return l;
-    const u = e[0] || "value";
-    var c = { key: t.ref || n || "name", label: u, data: [] };
-    l.datasets[0] = c;
-    for (var r in o) {
-      l.keys.push(r);
-      const p = s(r);
-      l.labels.push(p), c.data.push(o[r]);
+    if (s == null)
+      return c;
+    const l = e[0] || "value";
+    var u = { key: r.ref || t || "name", label: l, data: [] };
+    c.datasets[0] = u;
+    for (var n in s) {
+      c.keys.push(n);
+      const y = o(n);
+      c.labels.push(y), u.data.push(s[n]);
     }
-    return l;
+    return c;
   };
-}, b = (a) => (t) => t, g = (a) => {
-  const { xKey: t, yKeys: s, xLabelAccessor: n } = N(a), { yLabels: e } = E(a);
-  return (o) => {
-    var l = {
+}, m = (a) => (r) => r, g = (a) => {
+  const { xKey: r, yKeys: o, xLabelAccessor: t } = L(a), { yLabels: e } = E(a);
+  return (s) => {
+    var c = {
       labels: [],
       keys: [],
       datasets: []
     };
-    if (o == null)
-      return l;
-    s.map((d, y) => {
-      const i = d.ref, h = M(e, i, y);
-      var O = { key: i, label: h, data: [] };
-      l.datasets[y] = O;
+    if (s == null)
+      return c;
+    o.map((p, d) => {
+      const b = p.ref, h = V(e, b, d);
+      var O = { key: b, label: h, data: [] };
+      c.datasets[d] = O;
     });
-    const u = a.xKey ? (d, y) => t.accessor(d) : (d, y) => y;
-    for (var c in o) {
-      var r = o[c], p = u(r, c);
-      const d = n(p);
-      l.labels.push(d), l.keys.push(p), s.map((y, i) => {
-        l.datasets[i].data.push(y.accessor(r));
+    const l = a.xKey ? (p, d) => r.accessor(p) : (p, d) => d;
+    for (var u in s) {
+      var n = s[u], y = l(n, u);
+      const p = t(y);
+      c.labels.push(p), c.keys.push(y), o.map((d, b) => {
+        c.datasets[b].data.push(d.accessor(n));
       });
     }
-    return l;
+    return c;
   };
 }, C = {
-  Array: A,
+  Array: x,
   Object: g,
   KeyValue: $,
-  noop: b
+  noop: m
 }, J = {
-  Array: A,
+  Array: x,
   Object: g,
   KeyValue: $,
-  noop: b
+  noop: m
 };
-function V(a) {
-  const t = (a == null ? void 0 : a.xLabel) || "name", s = (a == null ? void 0 : a.xKey) || "x", n = (a == null ? void 0 : a.yKey) || "y", e = a == null ? void 0 : a.group;
+function M(a) {
+  const r = a?.xLabel || "name", o = a?.xKey || "x", t = a?.yKey || "y", e = a?.group;
   return {
-    x: k(s),
-    y: k(n),
-    group: k(e),
-    label: t
+    x: S(o),
+    y: S(t),
+    group: S(e),
+    label: r
   };
 }
-function G(a, t, s) {
-  var n = a[t];
-  return n || (n = {
-    key: t,
-    label: t,
+function G(a, r, o) {
+  var t = a[r];
+  return t || (t = {
+    key: r,
+    label: r,
     data: []
-  }, a[t] = n, n);
+  }, a[r] = t, t);
 }
 const Q = (a) => {
-  const { x: t, y: s, group: n, label: e } = V(a);
-  return (o) => {
-    var l = {
+  const { x: r, y: o, group: t, label: e } = M(a);
+  return (s) => {
+    var c = {
       datasets: []
     };
-    if (o == null)
-      return l;
-    var u = {};
-    const c = n ? (r) => n.accessor(r) : () => e;
-    return o.map((r, p) => {
-      const d = c(r);
-      var y = G(u, d);
-      y.data.push({
-        x: t.accessor(r),
-        y: s.accessor(r)
+    if (s == null)
+      return c;
+    var l = {};
+    const u = t ? (n) => t.accessor(n) : () => e;
+    return s.map((n, y) => {
+      const p = u(n);
+      var d = G(l, p);
+      d.data.push({
+        x: r.accessor(n),
+        y: o.accessor(n)
       });
-    }), Object.values(u).map((r) => {
-      l.datasets.push(r);
-    }), l;
+    }), Object.values(l).map((n) => {
+      c.datasets.push(n);
+    }), c;
   };
 }, U = (a) => {
-  const { x: t, y: s, group: n, label: e } = V(a);
-  return (o) => {
-    var l = {
+  const { x: r, y: o, group: t, label: e } = M(a);
+  return (s) => {
+    var c = {
       datasets: []
     };
-    if (o == null)
-      return l;
-    var u = {};
-    const c = n ? (r) => n.accessor(r) : () => e;
-    return Object.values(o).map((r, p) => {
-      const d = c(r);
-      var y = G(u, d);
-      y.data.push({
-        x: t.accessor(r),
-        y: s.accessor(r)
+    if (s == null)
+      return c;
+    var l = {};
+    const u = t ? (n) => t.accessor(n) : () => e;
+    return Object.values(s).map((n, y) => {
+      const p = u(n);
+      var d = G(l, p);
+      d.data.push({
+        x: r.accessor(n),
+        y: o.accessor(n)
       });
-    }), Object.values(u).map((r) => {
-      l.datasets.push(r);
-    }), l;
+    }), Object.values(l).map((n) => {
+      c.datasets.push(n);
+    }), c;
   };
-}, B = {
+}, P = {
   Array: Q,
   Object: U,
-  noop: b
+  noop: m
 };
 function W(a) {
-  const t = (a == null ? void 0 : a.xLabel) || "name", s = (a == null ? void 0 : a.xKey) || "x", n = (a == null ? void 0 : a.yKey) || "y";
-  return n instanceof Array && console.error("ScatterChart: yKey should be string only, not an array " + a.yKey), {
-    x: s,
-    y: n,
-    label: t
+  const r = a?.xLabel || "name", o = a?.xKey || "x", t = a?.yKey || "y";
+  return t instanceof Array && console.error("ScatterChart: yKey should be string only, not an array " + a.yKey), {
+    x: o,
+    y: t,
+    label: r
   };
 }
 const X = (a) => {
-  const { x: t, y: s, label: n } = W(a);
+  const { x: r, y: o, label: t } = W(a);
   return (e) => {
-    var o = {
+    var s = {
       datasets: []
     };
     if (e == null)
-      return o;
-    var l = {};
-    const u = a.metadata, c = u ? (r, p) => {
-      u.map((d) => {
-        r[d] = p[d];
+      return s;
+    var c = {};
+    const l = a.metadata, u = l ? (n, y) => {
+      l.map((p) => {
+        n[p] = y[p];
       });
-    } : (r, p) => {
+    } : (n, y) => {
     };
-    return e.map((r, p) => {
-      var d = Z(l, r[n]);
-      const y = {
-        x: r[t],
-        y: r[s]
+    return e.map((n, y) => {
+      var p = Z(c, n[t]);
+      const d = {
+        x: n[r],
+        y: n[o]
       };
-      c(y, r), d.data.push(y);
-    }), Object.values(l).map((r) => {
-      o.datasets.push(r);
-    }), o;
+      u(d, n), p.data.push(d);
+    }), Object.values(c).map((n) => {
+      s.datasets.push(n);
+    }), s;
   };
 }, Y = {
   Array: X,
-  noop: b
+  noop: m
 };
-function Z(a, t, s) {
-  var n = a[t];
-  return n || (n = {
-    key: t,
-    label: t,
+function Z(a, r, o) {
+  var t = a[r];
+  return t || (t = {
+    key: r,
+    label: r,
     data: []
-  }, a[t] = n, n);
+  }, a[r] = t, t);
 }
 function _(a) {
-  const t = (a == null ? void 0 : a.xLabel) || "name", s = (a == null ? void 0 : a.xKey) || "x", n = (a == null ? void 0 : a.yKey) || "y";
-  return n instanceof Array && console.error("ScatterChart: yKey should be string only, not an array " + a.yKey), {
-    x: s,
-    y: n,
-    label: t
+  const r = a?.xLabel || "name", o = a?.xKey || "x", t = a?.yKey || "y";
+  return t instanceof Array && console.error("ScatterChart: yKey should be string only, not an array " + a.yKey), {
+    x: o,
+    y: t,
+    label: r
   };
 }
 const aa = (a) => {
-  const { x: t, y: s } = _(a);
-  return (n) => {
+  const { x: r, y: o } = _(a);
+  return (t) => {
     var e = {
       datasets: []
-    }, o = {};
-    const l = k(a.group), u = a.metadata, c = u ? (r, p) => {
-      u.map((d) => {
-        r[d] = p[d];
+    }, s = {};
+    const c = S(a.group), l = a.metadata, u = l ? (n, y) => {
+      l.map((p) => {
+        n[p] = y[p];
       });
-    } : (r, p) => {
+    } : (n, y) => {
     };
-    return n.map((r, p) => {
-      const d = l.accessor(r);
-      var y = na(o, d);
-      const i = {
-        x: r[t],
-        y: r[s]
+    return t.map((n, y) => {
+      const p = c.accessor(n);
+      var d = ta(s, p);
+      const b = {
+        x: n[r],
+        y: n[o]
       };
-      c(i, r), y.data.push(i);
-    }), Object.values(o).map((r) => {
-      e.datasets.push(r);
+      u(b, n), d.data.push(b);
+    }), Object.values(s).map((n) => {
+      e.datasets.push(n);
     }), e;
   };
-}, ta = {
+}, ra = {
   Array: aa,
-  noop: b
+  noop: m
 };
-function na(a, t, s) {
-  var n = a[t];
-  return n || (n = {
-    key: t,
-    label: t,
+function ta(a, r, o) {
+  var t = a[r];
+  return t || (t = {
+    key: r,
+    label: r,
     data: []
-  }, a[t] = n, n);
+  }, a[r] = t, t);
 }
-function ea(a, t, s) {
-  var { colorStart: n, colorEnd: e, useEndAsStart: o } = s;
-  return o ? e - a * t : n + a * t;
+function na(a, r, o) {
+  var { colorStart: t, colorEnd: e, useEndAsStart: s } = o;
+  return s ? e - a * r : t + a * r;
 }
-function L(a, t) {
-  return Math.random() * (t - a) + a;
+function j(a, r) {
+  return Math.random() * (r - a) + a;
 }
-function ra(a) {
-  var t = L(0, 0.9), s = L(t, 1), n = {
-    colorStart: t,
-    colorEnd: s,
+function ea(a) {
+  var r = j(0, 0.9), o = j(r, 1), t = {
+    colorStart: r,
+    colorEnd: o,
     useEndAsStart: !1
-  }, e = R, { colorStart: o, colorEnd: l } = n, u = l - o, c = u / a, r, p, d = [];
-  for (r = 0; r < a; r++)
-    p = ea(r, c, n), d.push(e(p));
-  return d;
+  }, e = R, { colorStart: s, colorEnd: c } = t, l = c - s, u = l / a, n, y, p = [];
+  for (n = 0; n < a; n++)
+    y = na(n, u, t), p.push(e(y));
+  return p;
 }
-function oa(a, t, s) {
-  var n = Math.round(L(2, 10)), e = ra(n);
-  s.backgroundColor = e[0], s.borderColor = e[n - 1];
+function oa(a, r, o) {
+  var t = Math.round(j(2, 10)), e = ea(t);
+  o.backgroundColor = e[0], o.borderColor = e[t - 1];
 }
-function T(a, t, s) {
-  var n = a[t];
-  return n || (n = {
-    key: t,
-    label: t,
+function T(a, r, o) {
+  var t = a[r];
+  return t || (t = {
+    key: r,
+    label: r,
     data: []
-  }, oa(s, t, n), a[t] = n, n);
+  }, oa(o, r, t), a[r] = t, t);
 }
 function q(a) {
-  const t = (a == null ? void 0 : a.xLabel) || "name", s = (a == null ? void 0 : a.xKey) || "x", n = (a == null ? void 0 : a.yKey) || "y", e = (a == null ? void 0 : a.rKey) || "r";
-  return n instanceof Array && console.error("BubbleChart: yKey should be string only, not an array " + a.yKey), {
-    x: s,
-    y: n,
+  const r = a?.xLabel || "name", o = a?.xKey || "x", t = a?.yKey || "y", e = a?.rKey || "r";
+  return t instanceof Array && console.error("BubbleChart: yKey should be string only, not an array " + a.yKey), {
+    x: o,
+    y: t,
     r: e,
-    label: t
+    label: r
   };
 }
 const sa = (a) => {
-  const { x: t, y: s, r: n, label: e } = q(a);
-  return (o) => {
-    var l = {
+  const { x: r, y: o, r: t, label: e } = q(a);
+  return (s) => {
+    var c = {
       labels: [],
       datasets: []
     };
-    if (o == null)
-      return l;
-    var u = {};
-    return o.map((c, r) => {
-      var p = T(u, c[e], a);
-      p.data.push({
-        x: c[t],
-        y: c[s],
-        r: c[n]
+    if (s == null)
+      return c;
+    var l = {};
+    return s.map((u, n) => {
+      var y = T(l, u[e], a);
+      y.data.push({
+        x: u[r],
+        y: u[o],
+        r: u[t]
       });
-    }), Object.values(u).map((c) => {
-      l.datasets.push(c);
-    }), l;
+    }), Object.values(l).map((u) => {
+      c.datasets.push(u);
+    }), c;
   };
-}, la = (a) => {
-  const { x: t, y: s, r: n } = q(a);
+}, ca = (a) => {
+  const { x: r, y: o, r: t } = q(a);
   return (e) => {
-    var o = {
+    var s = {
       labels: [],
       datasets: []
-    }, l = {};
-    for (var u in e) {
-      var c = T(l, u, a), r = e[u];
-      c.data.push({
-        x: r[t],
-        y: r[s],
-        r: r[n]
+    }, c = {};
+    for (var l in e) {
+      var u = T(c, l, a), n = e[l];
+      u.data.push({
+        x: n[r],
+        y: n[o],
+        r: n[t]
       });
     }
-    return Object.values(l).map((p) => {
-      o.datasets.push(p);
-    }), o;
+    return Object.values(c).map((y) => {
+      s.datasets.push(y);
+    }), s;
   };
-}, ua = {
+}, la = {
   Array: sa,
-  Object: la,
-  noop: b
-}, ca = {
-  Array: A,
+  Object: ca,
+  noop: m
+}, ua = {
+  Array: x,
   Object: g,
   KeyValue: $,
-  noop: b
-}, da = {
-  Array: A,
-  Object: g,
-  KeyValue: $,
-  noop: b
-}, pa = {
-  Array: A,
-  Object: g,
-  KeyValue: $,
-  noop: b
+  noop: m
 }, ya = {
-  Array: A,
+  Array: x,
   Object: g,
   KeyValue: $,
-  noop: b
-}, ia = {
+  noop: m
+}, pa = {
+  Array: x,
+  Object: g,
+  KeyValue: $,
+  noop: m
+}, da = {
+  Array: x,
+  Object: g,
+  KeyValue: $,
+  noop: m
+}, ba = {
   Line: C,
   MultiLine: C,
   AreaChart: C,
   Bar: J,
-  StackedBar: B,
-  GroupedBar: B,
+  StackedBar: P,
+  GroupedBar: P,
   Scatter: Y,
-  GroupedScatter: ta,
-  Bubble: ua,
-  Radar: ca,
-  PolarArea: da,
+  GroupedScatter: ra,
+  Bubble: la,
+  Radar: ua,
+  PolarArea: ya,
   Pie: pa,
-  Doughnut: ya
+  Doughnut: da
 };
-function va(a, t, s) {
-  var n, e = s || "Array", o = (n = ia[a]) == null ? void 0 : n[e];
-  return o ? o(t) : (console.info("Data Converter not found " + a + ":" + e), b);
+function ia(a, r, o) {
+  var t = o || "Array", e = ba[a]?.[t];
+  return e ? e(r) : (console.info("Data Converter not found " + a + ":" + t), m);
 }
-function w(a, t, s) {
-  var { colorStart: n, colorEnd: e, useEndAsStart: o } = s;
-  return o ? e - a * t : n + a * t;
+function w(a, r, o) {
+  var { colorStart: t, colorEnd: e, useEndAsStart: s } = o;
+  return s ? e - a * r : t + a * r;
 }
-function S(a, t) {
-  return Math.random() * (t - a) + a;
+function k(a, r) {
+  return Math.random() * (r - a) + a;
 }
-function x(a) {
-  var t = S(0, 0.9), s = S(t, 1), n = {
-    colorStart: t,
-    colorEnd: s,
+function A(a) {
+  var r = k(0, 0.9), o = k(r, 1), t = {
+    colorStart: r,
+    colorEnd: o,
     useEndAsStart: !1
-  }, e = R, { colorStart: o, colorEnd: l } = n, u = l - o, c = u / a, r, p, d = [];
-  for (r = 0; r < a; r++)
-    p = w(r, c, n), d.push(e(p));
-  return d;
+  }, e = R, { colorStart: s, colorEnd: c } = t, l = c - s, u = l / a, n, y, p = [];
+  for (n = 0; n < a; n++)
+    y = w(n, u, t), p.push(e(y));
+  return p;
 }
 function z() {
-  var a = S(0, 0.9), t = S(a, 1), s = {
+  var a = k(0, 0.9), r = k(a, 1), o = {
     colorStart: a,
-    colorEnd: t,
+    colorEnd: r,
     useEndAsStart: !1
-  }, n = R, { colorStart: e, colorEnd: o } = s, l = o - e, u = l / 1, c;
-  return c = w(0, u, s), n(c);
+  }, t = R, { colorStart: e, colorEnd: s } = o, c = s - e, l = c / 1, u;
+  return u = w(0, l, o), t(u);
 }
-const f = (a) => (t, s) => {
-  var n;
-  return t == null || t == null || (n = t.datasets) == null || n.map((e) => {
-    e.backgroundColor = x(1), e.borderColor = x(1);
-  }), t;
-}, m = () => (a) => a, ba = (a, t) => {
-  a.backgroundColor = (t == null ? void 0 : t.backgroundColor) || x(1)[0], a.borderColor = (t == null ? void 0 : t.borderColor) || x(1)[0];
+const v = (a) => (r, o) => (r == null || r == null || r.datasets?.map((t) => {
+  t.backgroundColor = A(1), t.borderColor = A(1);
+}), r), f = () => (a) => a, ma = (a, r) => {
+  a.backgroundColor = r?.backgroundColor || A(1)[0], a.borderColor = r?.borderColor || A(1)[0];
 };
 function F(a) {
-  const t = {}, s = [];
-  return a.map((n) => {
-    Object.keys(n).map((e) => {
-      t[e] || (s.push(e), t[e] = !0);
+  const r = {}, o = [];
+  return a.map((t) => {
+    Object.keys(t).map((e) => {
+      r[e] || (o.push(e), r[e] = !0);
     });
-  }), s;
+  }), o;
 }
 function H(a) {
-  const t = {}, s = [];
-  return Object.values(a).map((n) => {
-    Object.keys(n).map((e) => {
-      t[e] || (s.push(e), t[e] = !0);
+  const r = {}, o = [];
+  return Object.values(a).map((t) => {
+    Object.keys(t).map((e) => {
+      r[e] || (o.push(e), r[e] = !0);
     });
-  }), s;
+  }), o;
 }
-function I(a, t, s) {
+function I(a, r, o) {
   if (a instanceof Array) {
-    const n = t % a.length;
-    return a[n];
+    const t = r % a.length;
+    return a[t];
   } else
-    return a[s];
+    return a[o];
 }
-const v = (a, t) => {
-  function s(o, l, u) {
-    const c = u.length, r = F(u);
-    r.map((p) => {
-      o[p] = [];
-    }), o.data && o.data.map((p, d) => {
-      const y = d % c, i = u[y];
-      r.map((h) => {
-        o[h].push(i == null ? void 0 : i[h]);
+const i = (a, r) => {
+  function o(s, c, l) {
+    const u = l.length, n = F(l);
+    n.map((y) => {
+      s[y] = [];
+    }), s.data && s.data.map((y, p) => {
+      const d = p % u, b = l[d];
+      n.map((h) => {
+        s[h].push(b?.[h]);
       });
     });
   }
-  function n(o, l, u) {
-    const c = H(u);
-    c.map((r) => {
-      o[r] = [];
-    }), o.data && o.data.map((r, p) => {
-      const d = l.labels[p], y = u[d];
-      c.map((i) => {
-        (y == null ? void 0 : y[i]) != null ? o[i][p] = y == null ? void 0 : y[i] : i.includes("Color") && (o[i][p] = z());
-      });
-    });
-  }
-  function e(o, l) {
-    Object.keys(l).map((u) => {
-      o[u] = l[u];
-    });
-  }
-  return (o, l) => {
-    if (a == null || o == null || o == null)
-      return o;
-    if (o)
-      return o.datasets && o.datasets.map((u, c) => {
-        var r;
-        const p = I(a, c, (r = o.labels) == null ? void 0 : r[c]), d = p.style;
-        d instanceof Array ? s(u, o, d) : n(u, o, d), p.props && e(u, p.props);
-      }), o;
-  };
-}, j = {
-  Array: v,
-  Named: v,
-  Random: f,
-  Noop: m
-}, ma = (a) => (t, s) => {
-  var n;
-  return t == null || t == null || (n = t.datasets) == null || n.map((e) => {
-    e.backgroundColor = x(t.labels.length), e.borderColor = x(t.labels.length);
-  }), t;
-}, fa = {
-  Array: v,
-  Named: v,
-  Random: ma,
-  Noop: m
-}, P = {
-  Array: v,
-  Named: v,
-  Random: f,
-  Noop: m
-}, ha = {
-  Array: v,
-  Named: v,
-  Random: f,
-  Noop: m
-}, xa = (a, t) => {
-  function s(e, o, l) {
-    const u = l.length, c = F(l);
-    c.map((r) => {
-      e[r] = [];
-    }), e.data && e.data.map((r, p) => {
-      const d = p % u, y = l[d];
-      c.map((i) => {
-        e[i].push(y == null ? void 0 : y[i]);
-      });
-    });
-  }
-  function n(e, o, l) {
+  function t(s, c, l) {
     const u = H(l);
-    u.map((c) => {
-      e[c] = [];
-    }), e.data && e.data.map((c, r) => {
-      const p = o.labels[r], d = l[p];
-      u.map((y) => {
-        (d == null ? void 0 : d[y]) != null ? e[y][r] = d == null ? void 0 : d[y] : y.includes("Color") && (e[y][r] = z());
+    u.map((n) => {
+      s[n] = [];
+    }), s.data && s.data.map((n, y) => {
+      const p = c.labels[y], d = l[p];
+      u.map((b) => {
+        d?.[b] != null ? s[b][y] = d?.[b] : b.includes("Color") && (s[b][y] = z());
       });
     });
   }
-  return (e, o) => {
+  function e(s, c) {
+    Object.keys(c).map((l) => {
+      s[l] = c[l];
+    });
+  }
+  return (s, c) => {
+    if (a == null || s == null || s == null)
+      return s;
+    if (s)
+      return s.datasets && s.datasets.map((l, u) => {
+        const n = I(a, u, s.labels?.[u]), y = n.style;
+        y instanceof Array ? o(l, s, y) : t(l, s, y), n.props && e(l, n.props);
+      }), s;
+  };
+}, N = {
+  Array: i,
+  Named: i,
+  Random: v,
+  Noop: f
+}, fa = (a) => (r, o) => (r == null || r == null || r.datasets?.map((t) => {
+  t.backgroundColor = A(r.labels.length), t.borderColor = A(r.labels.length);
+}), r), va = {
+  Array: i,
+  Named: i,
+  Random: fa,
+  Noop: f
+}, B = {
+  Array: i,
+  Named: i,
+  Random: v,
+  Noop: f
+}, ha = {
+  Array: i,
+  Named: i,
+  Random: v,
+  Noop: f
+}, Aa = (a, r) => {
+  function o(e, s, c) {
+    const l = c.length, u = F(c);
+    u.map((n) => {
+      e[n] = [];
+    }), e.data && e.data.map((n, y) => {
+      const p = y % l, d = c[p];
+      u.map((b) => {
+        e[b].push(d?.[b]);
+      });
+    });
+  }
+  function t(e, s, c) {
+    const l = H(c);
+    l.map((u) => {
+      e[u] = [];
+    }), e.data && e.data.map((u, n) => {
+      const y = s.labels[n], p = c[y];
+      l.map((d) => {
+        p?.[d] != null ? e[d][n] = p?.[d] : d.includes("Color") && (e[d][n] = z());
+      });
+    });
+  }
+  return (e, s) => {
     if (a == null || e == null || e == null)
       return e;
     if (e)
-      return e.datasets && e.datasets.map((l, u) => {
-        var c;
-        const r = I(a, u, (c = e.labels) == null ? void 0 : c[u]).style;
-        r instanceof Array ? s(l, e, r) : n(l, e, r);
+      return e.datasets && e.datasets.map((c, l) => {
+        const u = I(a, l, e.labels?.[l]).style;
+        u instanceof Array ? o(c, e, u) : t(c, e, u);
       }), e;
   };
-}, Aa = (a, t) => (s, n) => (s == null || s == null || s.datasets.map((e, o) => {
-  const l = a[e.key] || a[o];
-  ba(e, l);
-}), s), $a = {
-  Array: xa,
-  Named: Aa,
-  Random: f,
-  Noop: m
+}, xa = (a, r) => (o, t) => (o == null || o == null || o.datasets.map((e, s) => {
+  const c = a[e.key] || a[s];
+  ma(e, c);
+}), o), $a = {
+  Array: Aa,
+  Named: xa,
+  Random: v,
+  Noop: f
 }, ga = {
-  Array: v,
-  Named: v,
-  Random: f,
-  Noop: m
+  Array: i,
+  Named: i,
+  Random: v,
+  Noop: f
 }, Ka = {
-  Array: v,
-  Named: v,
-  Random: f,
-  Noop: m
-}, ka = {
-  Array: v,
-  Named: v,
-  Random: f,
-  Noop: m
+  Array: i,
+  Named: i,
+  Random: v,
+  Noop: f
+}, Sa = {
+  Array: i,
+  Named: i,
+  Random: v,
+  Noop: f
 }, D = {
-  Array: v,
-  Named: v,
-  Random: f,
-  Noop: m
+  Array: i,
+  Named: i,
+  Random: v,
+  Noop: f
 };
-var Sa = {
-  Line: j,
-  MultiLine: j,
-  AreaChart: j,
-  Bar: fa,
-  StackedBar: P,
+var ka = {
+  Line: N,
+  MultiLine: N,
+  AreaChart: N,
+  Bar: va,
+  StackedBar: B,
   Scatter: ha,
   GroupedScatter: $a,
   Bubble: ga,
   Radar: Ka,
-  PolarArea: ka,
+  PolarArea: Sa,
   Pie: D,
   Doughnut: D,
-  GroupedBar: P
+  GroupedBar: B
 };
 const Oa = (a) => {
   if (!a)
@@ -559,25 +551,24 @@ const Oa = (a) => {
   } else if (Object.keys(a).length > 0)
     return "Named";
   return "Noop";
-}, Ca = (a, t, s) => {
-  var n;
-  const e = Oa(t);
-  var o = ((n = Sa[a]) == null ? void 0 : n[e]) || m;
-  return o(t, s);
+}, Ca = (a, r, o) => {
+  const t = Oa(r);
+  var e = ka[a]?.[t] || f;
+  return e(r, o);
 }, K = (a) => a;
-function ja(a) {
-  const t = a.accessorOptions || {};
-  return Ca(a.type, a.styleOptions, t);
+function Na(a) {
+  const r = a.accessorOptions || {};
+  return Ca(a.type, a.styleOptions, r);
 }
-function La(a) {
-  const t = a.accessorOptions || {};
-  return va(a.type, t, t.sourceType);
+function ja(a) {
+  const r = a.accessorOptions || {};
+  return ia(a.type, r, r.sourceType);
 }
 const Ea = (a) => {
-  const t = a.dataPipeLine || {}, s = t.preProcess || K, n = t.postProcess || K, e = t.applyStyle || ja(a) || K, o = t.convertData || La(a) || K;
-  return (l) => {
-    const u = s(l), c = o(u), r = e(c);
-    return n(r);
+  const r = a.dataPipeLine || {}, o = r.preProcess || K, t = r.postProcess || K, e = r.applyStyle || Na(a) || K, s = r.convertData || ja(a) || K;
+  return (c) => {
+    const l = o(c), u = s(l), n = e(u);
+    return t(n);
   };
 };
 export {

@@ -1,6 +1,5 @@
 import { StyleOptions } from '@palmyralabs/chartjs-utils';
 import { IRemoteDataChartOptions } from './Types';
-
 interface IMultiLineChartOptions extends IRemoteDataChartOptions<'line'> {
     styleOptions?: never;
     accessorOptions?: never;

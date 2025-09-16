@@ -1,6 +1,5 @@
 import { IRemoteDataChartOptions } from './Types';
 import { AttributeAccessor, IDatasetStyleOptions, RawDataType } from '@palmyralabs/chartjs-utils';
-
 interface IDoughnutChartOptions extends IRemoteDataChartOptions<'doughnut'> {
     styleOptions?: never;
     accessorOptions?: never;

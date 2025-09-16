@@ -1,7 +1,6 @@
 import { IEndPoint, IEndPointOptions } from '@palmyralabs/palmyra-wire';
 import { DataTransformer } from '../../chartjs/Types';
 import { storeBacked } from '../chart/Types';
-
 interface IDataManagerInput extends storeBacked {
     filter?: any;
     storeOptions: {

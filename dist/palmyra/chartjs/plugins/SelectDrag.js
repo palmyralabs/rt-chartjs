@@ -1,114 +1,106 @@
-const w = /* @__PURE__ */ new WeakMap(), m = (e) => w.get(e) || null, u = (e, o) => {
-  const d = m(e);
-  return w.set(e, Object.assign({}, d, o)), o;
-}, b = {
+const u = /* @__PURE__ */ new WeakMap(), c = (e) => u.get(e) || null, a = (e, l) => {
+  const o = c(e);
+  return u.set(e, Object.assign({}, o, l)), l;
+}, r = {
   colors: {
     selection: "#e8eff6",
     selectedElements: "#1f77b4",
     unselectedElements: "#cccccc"
   }
-}, y = {
+}, g = {
   id: "selectdrag",
-  start: (e, o, d) => {
-    var l, i, x, c;
-    if (!((c = (x = (i = (l = e == null ? void 0 : e.config) == null ? void 0 : l.options) == null ? void 0 : i.plugins) == null ? void 0 : x.selectdrag) != null && c.enabled))
+  start: (e, l, o) => {
+    if (!e?.config?.options?.plugins?.selectdrag?.enabled)
       return;
     const n = e.canvas;
-    n.addEventListener("mousedown", (t) => {
-      if (e.getElementsAtEventForMode(t, "index", { intersect: !1 }).length === 0)
+    n.addEventListener("mousedown", (s) => {
+      if (e.getElementsAtEventForMode(s, "index", { intersect: !1 }).length === 0)
         return;
-      const a = e.getElementsAtEventForMode(t, "index", { intersect: !1 })[0].index, f = e.data.labels[a];
-      u(e, {
+      const i = e.getElementsAtEventForMode(s, "index", { intersect: !1 })[0].index, d = e.data.labels[i];
+      a(e, {
         selectionXY: {
           drawing: !0,
-          start: { axisValue: f, axisIndex: a, x: t.offsetX, y: t.offsetY },
+          start: { axisValue: d, axisIndex: i, x: s.offsetX, y: s.offsetY },
           end: {}
         }
       });
-    }), window.addEventListener("mouseup", (t) => {
-      var X, Y, p, E, v;
-      const s = m(e);
-      if (!s || ((X = s == null ? void 0 : s.selectionXY) == null ? void 0 : X.drawing) === !1)
+    }), window.addEventListener("mouseup", (s) => {
+      const t = c(e);
+      if (!t || t?.selectionXY?.drawing === !1)
         return;
-      const a = e.getElementsAtEventForMode(t, "index", { intersect: !1 }), f = a.length > 0 ? a[0].index : e.data.labels.length - 1, r = e.data.labels[f];
-      s.selectionXY.start.axisValue > r ? (s.selectionXY.end = JSON.parse(JSON.stringify(s.selectionXY.start)), s.selectionXY.start = { axisValue: r, axisIndex: f, x: t.offsetX, y: t.offsetY }) : s.selectionXY.end = { axisValue: r, axisIndex: f, x: t.offsetX, y: t.offsetY }, s.selectionXY.drawing = !1, u(e, s), e.update();
-      const g = (v = (E = (p = (Y = e == null ? void 0 : e.config) == null ? void 0 : Y.options) == null ? void 0 : p.plugins) == null ? void 0 : E.selectdrag) == null ? void 0 : v.onSelectComplete;
-      g && g({
+      const i = e.getElementsAtEventForMode(s, "index", { intersect: !1 }), d = i.length > 0 ? i[0].index : e.data.labels.length - 1, x = e.data.labels[d];
+      t.selectionXY.start.axisValue > x ? (t.selectionXY.end = JSON.parse(JSON.stringify(t.selectionXY.start)), t.selectionXY.start = { axisValue: x, axisIndex: d, x: s.offsetX, y: s.offsetY }) : t.selectionXY.end = { axisValue: x, axisIndex: d, x: s.offsetX, y: s.offsetY }, t.selectionXY.drawing = !1, a(e, t), e.update();
+      const f = e?.config?.options?.plugins?.selectdrag?.onSelectComplete;
+      f && f({
         range: [
-          s.selectionXY.start.axisValue,
-          s.selectionXY.end.axisValue
+          t.selectionXY.start.axisValue,
+          t.selectionXY.end.axisValue
         ],
         boundingBox: [
-          s.selectionXY.start,
+          t.selectionXY.start,
           [
-            s.selectionXY.end.x,
-            s.selectionXY.start.y
+            t.selectionXY.end.x,
+            t.selectionXY.start.y
           ],
-          s.selectionXY.end,
+          t.selectionXY.end,
           [
-            s.selectionXY.start.x,
-            s.selectionXY.end.y
+            t.selectionXY.start.x,
+            t.selectionXY.end.y
           ]
         ]
       });
-    }), n.addEventListener("mousemove", (t) => {
-      var a;
-      const s = m(e);
-      !s || ((a = s == null ? void 0 : s.selectionXY) == null ? void 0 : a.drawing) === !1 || (s.selectionXY.end = { x: t.offsetX, y: t.offsetY }, e.render(), u(e, s));
+    }), n.addEventListener("mousemove", (s) => {
+      const t = c(e);
+      !t || t?.selectionXY?.drawing === !1 || (t.selectionXY.end = { x: s.offsetX, y: s.offsetY }, e.render(), a(e, t));
     });
   },
-  beforeUpdate: (e, o, d) => {
-    var l, i, x, c;
-    if (!((c = (x = (i = (l = e == null ? void 0 : e.config) == null ? void 0 : l.options) == null ? void 0 : i.plugins) == null ? void 0 : x.selectdrag) != null && c.enabled))
+  beforeUpdate: (e, l, o) => {
+    if (!e?.config?.options?.plugins?.selectdrag?.enabled)
       return;
-    const n = m(e);
-    e.data.datasets = e.data.datasets.map((t) => (t.backgroundColor = e.data.labels.map((s, a) => {
-      var f, r, g, X, Y, p;
-      return !n || !((r = (f = n == null ? void 0 : n.selectionXY) == null ? void 0 : f.start) != null && r.x) || !((X = (g = n == null ? void 0 : n.selectionXY) == null ? void 0 : g.end) != null && X.x) || a >= ((Y = n.selectionXY.start) == null ? void 0 : Y.axisIndex) && a <= ((p = n.selectionXY.end) == null ? void 0 : p.axisIndex) ? b.colors.selectedElements : b.colors.unselectedElements;
-    }), t));
+    const n = c(e);
+    e.data.datasets = e.data.datasets.map((s) => (s.backgroundColor = e.data.labels.map((t, i) => !n || !n?.selectionXY?.start?.x || !n?.selectionXY?.end?.x || i >= n.selectionXY.start?.axisIndex && i <= n.selectionXY.end?.axisIndex ? r.colors.selectedElements : r.colors.unselectedElements), s));
   },
-  afterDraw: (e, o, d) => {
-    var i, x, c, t, s;
-    const n = m(e);
-    if (!n || ((i = n == null ? void 0 : n.selectionXY) == null ? void 0 : i.drawing) === !1 && !((x = n.selectionXY.end) != null && x.x))
+  afterDraw: (e, l, o) => {
+    const n = c(e);
+    if (!n || n?.selectionXY?.drawing === !1 && !n.selectionXY.end?.x)
       return;
-    const { ctx: l } = e;
-    l.save(), l.globalCompositeOperation = "destination-over", l.fillStyle = b.colors.selection, l.fillRect(
-      ((c = n.selectionXY.start) == null ? void 0 : c.x) || 0,
+    const { ctx: s } = e;
+    s.save(), s.globalCompositeOperation = "destination-over", s.fillStyle = r.colors.selection, s.fillRect(
+      n.selectionXY.start?.x || 0,
       e.chartArea.top,
-      (((t = n.selectionXY.end) == null ? void 0 : t.x) || 0) - (((s = n.selectionXY.start) == null ? void 0 : s.x) || 0),
+      (n.selectionXY.end?.x || 0) - (n.selectionXY.start?.x || 0),
       e.chartArea.height
-    ), l.restore();
+    ), s.restore();
   },
-  setSelection: (e, o = []) => {
+  setSelection: (e, l = []) => {
     if (e.data.labels.length === 0 || e.data.datasets.length === 0)
       return;
-    o.length === 0 && (u(e, null), e.update());
-    const d = {
+    l.length === 0 && (a(e, null), e.update());
+    const o = {
       selectionXY: {
         drawing: !1,
         start: {},
         end: {}
       }
-    }, n = e.data.labels.findIndex((i) => i === o[0]);
-    d.selectionXY.start = {
-      axisValue: o[0],
+    }, n = e.data.labels.findIndex((t) => t === l[0]);
+    o.selectionXY.start = {
+      axisValue: l[0],
       axisIndex: n,
       x: e.scales.x.getPixelForValue(e.data.labels[n]),
       y: 0
     };
-    const l = e.data.labels.findIndex((i) => i === o[1]);
-    d.selectionXY.end = {
-      axisValue: o[0],
-      axisIndex: l,
-      x: e.scales.x.getPixelForValue(e.data.labels[l]),
+    const s = e.data.labels.findIndex((t) => t === l[1]);
+    o.selectionXY.end = {
+      axisValue: l[0],
+      axisIndex: s,
+      x: e.scales.x.getPixelForValue(e.data.labels[s]),
       y: e.chartArea.height
-    }, u(e, d), e.update();
+    }, a(e, o), e.update();
   },
   clearSelection: (e) => {
-    u(e, null), e.update();
+    a(e, null), e.update();
   }
 };
 export {
-  y as SelectDrag
+  g as SelectDrag
 };

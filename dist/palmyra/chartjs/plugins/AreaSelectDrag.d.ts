@@ -1,5 +1,4 @@
 import { Chart as ChartRef } from 'chart.js';
-
 declare const AreaSelectDrag: {
     id: string;
     start: (chart: ChartRef, _args: any, options: any) => void;

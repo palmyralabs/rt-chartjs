@@ -1,30 +1,34 @@
-import { s as f } from "../../../chunks/rainbow.js";
-import d from "axios";
-import { useEffect as v } from "react";
-const g = function(e, t) {
-  return t ? typeof e == "string" && t instanceof Array ? e.replace(/({\d})/g, function(r) {
-    let a = r.replace(/{/, "").replace(/}/, "");
-    return t[a];
-  }) : typeof e == "string" && t instanceof Object ? Object.keys(t).length === 0 ? e : e.replace(/({([^}]+)})/g, function(r) {
-    let a = r.replace(/{/, "").replace(/}/, "");
-    return t[a] ? t[a] : r;
-  }) : e : e;
-}, m = function(e) {
-  return typeof e == "string" && (e.search(/({([^}]+)})/g) > 0 || e.search(/({\d})/g) > 0);
-};
-var U = Object.defineProperty, P = (e, t, r) => t in e ? U(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, u = (e, t, r) => P(e, typeof t != "symbol" ? t + "" : t, r);
-class c {
-  constructor(t, r, a) {
-    u(this, "options"), u(this, "target"), u(this, "endPoint"), u(this, "axiosInstance"), this.axiosInstance = d.create({
-      timeout: 5e3
+import { u as m } from "../../../chunks/rainbow.js";
+import f from "axios";
+import { useEffect as y } from "react";
+const h = (a) => a, d = function(a, t) {
+  return t ? typeof a == "string" && t instanceof Array ? a.replace(/({\d})/g, function(r) {
+    let e = r.replace(/{/, "").replace(/}/, "");
+    return t[e];
+  }) : typeof a == "string" && t instanceof Object ? Object.keys(t).length === 0 ? a : a.replace(/({([^}]+)})/g, function(r) {
+    let e = r.replace(/{/, "").replace(/}/, "");
+    return t[e] ? t[e] : r;
+  }) : a : a;
+}, U = function(a) {
+  return typeof a == "string" && (a.search(/({([^}]+)})/g) > 0 || a.search(/({\d})/g) > 0);
+}, P = () => f.create({
+  timeout: 5e3
+});
+class u {
+  options;
+  target;
+  endPoint;
+  axiosInstance;
+  constructor(t, r, e, s) {
+    const o = P();
+    e.axiosCustomizer && e.axiosCustomizer(o);
+    const n = s || (() => (i) => {
+      const l = i.request.responseURL || i.config.url;
+      console.log(i.response.status + ":" + i.code + "-requestUrl:" + l), console.log(i.message + " -- response data:'" + i.response.data + "'");
     });
-    const s = a || (() => (n) => {
-      const i = n.request.responseURL || n.config.url;
-      console.log(n.response.status + ":" + n.code + "-requestUrl:" + i), console.log(n.message + " -- response data:'" + n.response.data + "'");
-    });
-    d.interceptors.response.use(void 0, function(n) {
-      return n.handleGlobally = s(n), Promise.reject(n);
-    }), this.options = t, this.target = t.target, this.endPoint = r;
+    o.interceptors.response.use(void 0, function(i) {
+      return i.handleGlobally = n(i), Promise.reject(i);
+    }), this.axiosInstance = o, this.options = e, this.target = t, this.endPoint = r;
   }
   queryUrl() {
     return typeof this.endPoint == "string" ? this.endPoint : this.endPoint.query;
@@ -45,79 +49,91 @@ class c {
     return typeof t == "string" ? t : t.delete ? t.delete : t.put;
   }
   getClient() {
-    return d;
+    return this.axiosInstance;
   }
   getEndPoint() {
     return this.endPoint;
   }
   getOptions() {
-    return this.options;
+    return this.options?.endPointOptions || {};
   }
   getTarget() {
     return this.target;
   }
   formatUrl(t, r) {
-    return r ? g(g(t, r.options), r.endPointVars) : t;
+    return r ? d(d(t, r.options), r.endPointVars) : t;
   }
   isUrlValid(t) {
-    return m(t) ? Promise.reject("endPoint options yet to be populated " + t) : !1;
+    return U(t) ? Promise.reject("endPoint options yet to be populated " + t) : !1;
   }
   handleError(t, r) {
-    return r != null && r.errorHandler && r.errorHandler(t) || t.handleGlobally(t), Promise.reject(t);
+    return r?.errorHandler && r.errorHandler(t) || t.handleGlobally && t.handleGlobally(t), Promise.reject(t);
   }
   convertQueryParams(t, r = 15) {
-    const a = (t == null ? void 0 : t.sortOrder) || {}, s = Object.keys(a).map((l) => (a[l] === "asc" ? "+" : "-") + l), n = !!t.total, i = t.filter || {}, h = t.offset || 0, o = t.limit || r;
-    return { ...i, _total: n, _orderBy: s.length ? s.join(",") : [], _offset: h, _limit: o };
+    const e = t?.sortOrder || {}, s = Object.keys(e).map((c) => (e[c] === "asc" ? "+" : "-") + c), o = !!t.total, n = v(t.filter), i = t.offset || 0, l = t.limit || r;
+    return { ...n, _total: o, _orderBy: s.length ? s.join(",") : [], _offset: i, _limit: l };
   }
 }
-var b = Object.defineProperty, E = (e, t, r) => t in e ? b(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, q = (e, t, r) => E(e, t + "", r);
-class w extends c {
-  constructor(t, r, a, s) {
-    super(t, r, a), q(this, "idProperty"), this.idProperty = s || "id";
+function v(a) {
+  const t = {};
+  return a && Object.entries(a).map(([r, e]) => {
+    g(r, t, e);
+  }), t;
+}
+function g(a, t, r) {
+  typeof r == "object" ? Object.entries(r).map(([e, s]) => {
+    g(a + "." + e, t, s);
+  }) : r && r != "" && (t[a] = r);
+}
+class E extends u {
+  idProperty;
+  constructor(t, r, e, s, o) {
+    super(t, r, e, s), this.idProperty = o || "id";
   }
   query(t) {
-    var r = this.target + this.queryUrl(), a = this.formatUrl(r, t);
-    const s = { params: this.convertQueryParams(t) };
-    return this.getClient().get(a, s).then((n) => {
-      var i;
-      return (i = n.data) == null ? void 0 : i.result;
-    }).catch((n) => this.handleError(n, t));
+    var r = this.target + this.queryUrl();
+    const e = t?.transformResult || h;
+    var s = this.formatUrl(r, t);
+    const o = { params: this.convertQueryParams(t) };
+    return this.getClient().get(s, o).then((n) => e(n.data?.result)).catch((n) => this.handleError(n, t));
   }
 }
-var C = Object.defineProperty, j = (e, t, r) => t in e ? C(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, O = (e, t, r) => j(e, t + "", r);
-class p extends c {
-  constructor(t, r, a, s) {
-    super(t, r, a), O(this, "idProperty"), this.idProperty = s || "id";
+class p extends u {
+  idProperty;
+  constructor(t, r, e, s, o) {
+    super(t, r, e, s), this.idProperty = o || "id";
   }
   getEndPoint() {
     return this.endPoint;
   }
   query(t) {
-    var r = this.target + this.queryUrl(), a = this.formatUrl(r, t);
-    const s = { params: this.convertQueryParams(t) };
-    return this.isUrlValid(a) || this.getClient().get(a, s).then((n) => n.data).catch((n) => this.handleError(n, t));
+    var r = this.target + this.queryUrl();
+    const e = t?.transformResult || h;
+    var s = this.formatUrl(r, t);
+    const o = { params: this.convertQueryParams(t) };
+    return this.isUrlValid(s) || this.getClient().get(s, o).then((n) => e(n.data)).catch((n) => this.handleError(n, t));
   }
   export(t) {
-    var r = this.target + this.queryUrl(), a = this.formatUrl(r, t);
+    var r = this.target + this.queryUrl(), e = this.formatUrl(r, t);
     const s = this.convertQueryParams(t);
     s._format = t.format;
-    const n = new URLSearchParams(s).toString();
-    window.open(a + "?" + n, "_blank");
+    const o = new URLSearchParams(s).toString();
+    window.open(e + "?" + o, "_blank");
   }
   queryLayout(t) {
-    var r = this.target + this.queryUrl(), a = this.formatUrl(r, t);
-    return this.isUrlValid(a) || this.getClient().get(a, {
+    const r = t?.transformResult || h;
+    var e = this.target + this.queryUrl(), s = this.formatUrl(e, t);
+    return this.isUrlValid(s) || this.getClient().get(s, {
       headers: {
         action: "schema"
       }
-    }).then((s) => s.data).catch((s) => this.handleError(s, t));
+    }).then((o) => r(o.data)).catch((o) => this.handleError(o, t));
   }
   get(t, r) {
-    var a = this.target + this.queryUrl(), s = this.formatUrl(a, t);
-    return this.isUrlValid(s) || this.getClient().get(s).then((n) => {
-      var i;
-      return (i = n.data) == null ? void 0 : i.result;
-    }).catch((n) => this.handleError(n, t));
+    var e = this.target + this.getUrl();
+    const s = t?.transformResult || h;
+    var o = this.formatUrl(e, t);
+    return this.isUrlValid(o) || this.getClient().get(o).then((n) => s(n.data?.result)).catch((n) => this.handleError(n, t));
   }
   getIdentity(t) {
     throw new Error("Method not implemented.");
@@ -126,118 +142,116 @@ class p extends c {
     return "id";
   }
 }
-let $ = class extends p {
-  constructor(t, r, a, s) {
-    super(t, r, a, s);
+class b extends p {
+  constructor(t, r, e, s, o) {
+    super(t, r, e, s);
   }
   save(t, r) {
-    var a = this.target + this.postUrl(), s = this.formatUrl(a, r);
-    return this.isUrlValid(s) || this.getClient().post(s, t, { headers: { action: "save" } }).then((n) => {
-      var i;
-      return (i = n.data) == null ? void 0 : i.result;
-    }).catch((n) => this.handleError(n, r));
+    var e = this.target + this.postUrl(), s = this.formatUrl(e, r);
+    const o = r?.transformResult || h;
+    return this.isUrlValid(s) || this.getClient().post(s, t, { headers: { action: "save" } }).then((n) => o(n.data?.result)).catch((n) => this.handleError(n, r));
   }
   post(t, r) {
-    var a = this.target + this.postUrl(), s = this.formatUrl(a, r);
-    return this.isUrlValid(s) || this.getClient().post(s, t).then((n) => {
-      var i;
-      return (i = n.data) == null ? void 0 : i.result;
-    }).catch((n) => this.handleError(n, r));
+    var e = this.target + this.postUrl();
+    const s = r?.transformResult || h;
+    var o = this.formatUrl(e, r);
+    return this.isUrlValid(o) || this.getClient().post(o, t).then((n) => s(n.data?.result)).catch((n) => this.handleError(n, r));
   }
   put(t, r) {
-    var a = this.target + this.putUrl(), s = this.formatUrl(a, r);
-    return this.isUrlValid(s) || this.getClient().put(s, t).then((n) => {
-      var i;
-      return (i = n.data) == null ? void 0 : i.result;
-    }).catch((n) => this.handleError(n, r));
+    var e = this.target + this.putUrl();
+    const s = r?.transformResult || h;
+    var o = this.formatUrl(e, r);
+    return this.isUrlValid(o) || this.getClient().put(o, t).then((n) => s(n.data?.result)).catch((n) => this.handleError(n, r));
   }
   remove(t, r) {
-    var a = this.target + this.deleteUrl(), s = this.formatUrl(a, t);
-    return this.isUrlValid(s) || this.getClient().delete(s, { data: {} }).then((n) => {
-      var i;
-      return (i = n.data) == null ? void 0 : i.result;
-    }).catch((n) => this.handleError(n, r));
-  }
-};
-var F = Object.defineProperty, H = (e, t, r) => t in e ? F(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, V = (e, t, r) => H(e, t + "", r);
-class x extends c {
-  constructor(t, r, a, s) {
-    super(t, r, a), V(this, "idProperty"), this.idProperty = s || "id";
-  }
-  query(t) {
-    var r = this.target + this.queryUrl(), a = this.formatUrl(r, t);
-    const s = { params: this.convertQueryParams(t) };
-    return this.isUrlValid(a) || this.getClient().get(a, s).then((n) => n.data).catch((n) => this.handleError(n, t));
+    var e = this.target + this.deleteUrl();
+    const s = r?.transformResult || h;
+    var o = this.formatUrl(e, t);
+    return this.isUrlValid(o) || this.getClient().delete(o, { data: {} }).then((n) => s(n.data?.result)).catch((n) => this.handleError(n, r));
   }
 }
-var S = Object.defineProperty, Q = (e, t, r) => t in e ? S(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, D = (e, t, r) => Q(e, t + "", r);
-class _ extends c {
-  constructor(t, r, a, s) {
-    super(t, r, a), D(this, "idProperty"), this.idProperty = s || "id";
-  }
-  getChildren(t) {
-    const r = { filter: { parent: t.parent } };
-    return this.query(r);
-  }
-  getRoot() {
-    const t = {};
-    return this.query(t);
+class q extends u {
+  idProperty;
+  constructor(t, r, e, s, o) {
+    super(t, r, e, s), this.idProperty = o || "id";
   }
   query(t) {
-    var r = this.target + this.queryUrl(), a = this.formatUrl(r, t);
-    const s = { params: this.convertQueryParams(t), headers: { action: "nativeQuery" } };
-    return this.getClient().get(a, s).then((n) => n.data).catch((n) => {
-      this.handleError(n, t);
-    });
+    var r = this.target + this.queryUrl();
+    const e = t?.transformResult || h;
+    var s = this.formatUrl(r, t);
+    const o = { params: this.convertQueryParams(t) };
+    return this.isUrlValid(s) || this.getClient().get(s, o).then((n) => e(n.data)).catch((n) => this.handleError(n, t));
   }
 }
-var k = Object.defineProperty, I = (e, t, r) => t in e ? k(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, y = (e, t, r) => I(e, typeof t != "symbol" ? t + "" : t, r);
-class L {
+class O extends u {
+  idProperty;
+  constructor(t, r, e, s, o) {
+    super(t, r, e, s), this.idProperty = o || "id";
+  }
+  getChildren(t, r) {
+    const e = { ...r || {}, filter: { parent: t.parent } };
+    return this.query(e);
+  }
+  getRoot(t) {
+    return this.query(t || {});
+  }
+  query(t) {
+    var r = this.target + this.queryUrl();
+    const e = t?.transformResult || h;
+    var s = this.formatUrl(r, t);
+    const o = { params: this.convertQueryParams(t), headers: { action: "nativeQuery" } };
+    return this.getClient().get(s, o).then((n) => e(n.data)).catch((n) => this.handleError(n, t));
+  }
+}
+class C {
+  baseUrl = "/palmyra";
+  errorHandlerFactory;
+  storeOptions = {};
   constructor(t) {
-    y(this, "baseUrl", "/palmyra"), y(this, "errorHandlerFactory"), this.baseUrl = t.baseUrl || "/palmyra", this.errorHandlerFactory = t.errorHandlerFactory;
+    this.baseUrl = t.baseUrl || "/palmyra", this.errorHandlerFactory = t.errorHandlerFactory, t.storeOptions && (this.storeOptions = t.storeOptions);
   }
-  getGridStore(t, r, a) {
-    var s = { target: this.baseUrl, ...t };
-    return new p(s, r, this.errorHandlerFactory, a);
+  getGridStore(t, r, e) {
+    const s = t || {}, o = { ...this.storeOptions, ...s };
+    return new p(this.baseUrl, r, o, this.errorHandlerFactory, e);
   }
-  getFormStore(t, r, a) {
-    var s = { target: this.baseUrl, ...t };
-    return new $(s, r, this.errorHandlerFactory, a);
+  getFormStore(t, r, e) {
+    const s = t || {}, o = { ...this.storeOptions, ...s };
+    return new b(this.baseUrl, r, o, this.errorHandlerFactory, e);
   }
-  getChartStore(t, r, a) {
-    var s = { target: this.baseUrl, ...t };
-    return new w(s, r, this.errorHandlerFactory, a);
+  getChartStore(t, r, e) {
+    const s = t || {}, o = { ...this.storeOptions, ...s };
+    return new E(this.baseUrl, r, o, this.errorHandlerFactory, e);
   }
-  getLookupStore(t, r, a) {
-    var s = { target: this.baseUrl, ...t };
-    return new x(s, r, this.errorHandlerFactory, a);
+  getLookupStore(t, r, e) {
+    const s = t || {}, o = { ...this.storeOptions, ...s };
+    return new q(this.baseUrl, r, o, this.errorHandlerFactory, e);
   }
   getTreeStore(t, r) {
-    var a = { target: this.baseUrl, ...t };
-    return new _(a, r, this.errorHandlerFactory);
+    const e = t || {}, s = { ...this.storeOptions, ...e };
+    return new O(this.baseUrl, r, s, this.errorHandlerFactory);
   }
 }
-const A = (e) => {
-  const t = new L({ baseUrl: "/api/palmyra" });
+const w = (a) => {
+  const t = new C({ baseUrl: "/api/palmyra" });
   var r = {};
-  f(r, e.storeOptions);
-  const a = t.getChartStore(r, e.storeOptions.endPoint);
-  v(() => {
-    h(e.filter);
-  }, [e.filter]);
-  const s = (o) => e.transformData ? e.transformData(o) : o, n = (o) => {
-    e.onData(s(o));
-  }, i = (o) => {
-    if (e.onError) {
-      e.onError(o);
+  m(r, a.storeOptions);
+  const e = t.getChartStore(r, a.storeOptions.endPoint);
+  y(() => {
+    i(a.filter);
+  }, [a.filter]);
+  const s = (l) => a.transformData ? a.transformData(l) : l, o = (l) => {
+    a.onData(s(l));
+  }, n = (l) => {
+    if (a.onError) {
+      a.onError(l);
       return;
     }
-    e.onData(null);
-  }, h = (o) => {
-    a.query({ filter: o, limit: 2e3 }).then((l) => n(l)).catch((l) => i(l));
+    a.onData(null);
+  }, i = (l) => {
+    e.query({ filter: l, limit: 2e3 }).then((c) => o(c)).catch((c) => n(c));
   };
-  return { fetchData: h, transform: s };
+  return { fetchData: i, transform: s };
 };
 export {
-  A as useChartDataManager
+  w as useChartDataManager
 };

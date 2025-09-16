@@ -1,151 +1,144 @@
-const O = /* @__PURE__ */ new WeakMap(), Y = (e) => O.get(e) || null, r = (e, o) => {
-  const f = Y(e);
-  return O.set(e, Object.assign({}, f, o)), o;
-}, N = {
+const p = /* @__PURE__ */ new WeakMap(), X = (e) => p.get(e) || null, f = (e, n) => {
+  const l = X(e);
+  return p.set(e, Object.assign({}, l, n)), n;
+}, v = {
   colors: {
-    selection: "#e8eff6",
-    selectedElements: "#1f77b4",
-    unselectedElements: "#cccccc"
+    selection: "#e8eff6"
   }
-}, D = (e, o) => {
-  var f = e.chartArea.top, n = e.chartArea.bottom, l = e.scales.y.min, a = e.scales.y.max, i = -1, u = 0;
-  o.offsetY <= n && o.offsetY >= f && (i = Math.abs((o.offsetY - f) / (n - f)), i = (i - 1) * -1, i = i * Math.abs(a - l) + l, u = 1);
-  var c = e.chartArea.left, t = e.chartArea.right, s = e.scales.x.min, d = e.scales.x.max, x = -1;
-  return o.offsetX <= t && o.offsetX >= c && u == 1 && (x = Math.abs((o.offsetX - c) / (t - c)), x = x * Math.abs(d - s) + s), { x, y: i };
-}, P = {
+}, y = (e, n) => {
+  var l = e.chartArea.top, o = e.chartArea.bottom, a = e.scales.y.min, s = e.scales.y.max, t = -1, i = 0;
+  n.offsetY <= o && n.offsetY >= l && (t = Math.abs((n.offsetY - l) / (o - l)), t = (t - 1) * -1, t = t * Math.abs(s - a) + a, i = 1);
+  var c = e.chartArea.left, d = e.chartArea.right, r = e.scales.x.min, u = e.scales.x.max, x = -1;
+  return n.offsetX <= d && n.offsetX >= c && i == 1 && (x = Math.abs((n.offsetX - c) / (d - c)), x = x * Math.abs(u - r) + r), { x, y: t };
+}, V = {
   id: "areaSelectdrag",
-  start: (e, o, f) => {
-    var a, i, u, c;
-    if (!((c = (u = (i = (a = e == null ? void 0 : e.config) == null ? void 0 : a.options) == null ? void 0 : i.plugins) == null ? void 0 : u.selectdrag) != null && c.enabled))
+  start: (e, n, l) => {
+    if (!e?.config?.options?.plugins?.selectdrag?.enabled)
       return;
-    const n = e.canvas;
-    n.addEventListener("mousedown", (t) => {
-      const s = l(t);
-      if (!s || s.length === 0) {
-        r(e, {
+    const o = e.canvas;
+    o.addEventListener("mousedown", (s) => {
+      const t = a(s);
+      if (!t || t.length === 0) {
+        f(e, {
           selectionXY: {
             state: "mousedown"
           }
         });
         return;
       }
-      const d = e.getElementsAtEventForMode(t, "nearest", { intersect: !1 }, !1)[0].index, x = e.data.labels[d], X = D(e, t);
-      r(e, {
+      const i = e.getElementsAtEventForMode(s, "nearest", { intersect: !1 }, !1)[0].index, c = e.data.labels[i], d = y(e, s);
+      f(e, {
         selectionXY: {
           state: "drag",
           start: {
-            axisValue: x,
-            axisIndex: d,
-            x: t.offsetX,
-            y: t.offsetY,
-            xValue: X.x,
-            yValue: X.y
+            axisValue: c,
+            axisIndex: i,
+            x: s.offsetX,
+            y: s.offsetY,
+            xValue: d.x,
+            yValue: d.y
           }
         }
       });
     });
-    const l = (t) => {
+    const a = (s) => {
       try {
-        return e.getElementsAtEventForMode(t, "index", { intersect: !1 }, !1);
+        return e.getElementsAtEventForMode(s, "index", { intersect: !1 }, !1);
       } catch {
       }
     };
-    window.addEventListener("mouseup", (t) => {
-      var p, m, b, v, V, E, A, w, I;
-      const s = Y(e);
-      if (!s || ((p = s == null ? void 0 : s.selectionXY) == null ? void 0 : p.state) == "none")
+    window.addEventListener("mouseup", (s) => {
+      const t = X(e);
+      if (!t || t?.selectionXY?.state == "none")
         return;
-      const d = l(t);
-      if (d == null)
+      const i = a(s);
+      if (i == null)
         return;
-      const x = d.length > 0 ? d[0].index : e.data.labels.length - 1, X = e.data.labels[x];
-      s.selectionXY.start.axisValue > X ? (s.selectionXY.end = JSON.parse(JSON.stringify(s.selectionXY.start)), s.selectionXY.start = { axisValue: X, axisIndex: x, x: t.offsetX, y: t.offsetY }) : s.selectionXY.end = { axisValue: X, axisIndex: x, x: t.offsetX, y: t.offsetY }, s.selectionXY.state = "none", r(e, s);
-      const g = D(e, t);
-      s.selectionXY.end.xValue = g.x, s.selectionXY.end.yValue = g.y, e.update();
-      const y = (V = (v = (b = (m = e == null ? void 0 : e.config) == null ? void 0 : m.options) == null ? void 0 : b.plugins) == null ? void 0 : v.selectdrag) == null ? void 0 : V.onSelectComplete;
-      if (y) {
-        const { start: M, end: S } = s.selectionXY, C = Math.abs(M.x - S.x), L = Math.abs(M.y - S.y), F = ((I = (w = (A = (E = e == null ? void 0 : e.config) == null ? void 0 : E.options) == null ? void 0 : A.plugins) == null ? void 0 : w.selectdrag) == null ? void 0 : I.threshold) || 10;
-        if (C < F || L < F)
+      const c = i.length > 0 ? i[0].index : e.data.labels.length - 1, d = e.data.labels[c];
+      t.selectionXY.start.axisValue > d ? (t.selectionXY.end = JSON.parse(JSON.stringify(t.selectionXY.start)), t.selectionXY.start = { axisValue: d, axisIndex: c, x: s.offsetX, y: s.offsetY }) : t.selectionXY.end = { axisValue: d, axisIndex: c, x: s.offsetX, y: s.offsetY }, t.selectionXY.state = "none", f(e, t);
+      const r = y(e, s);
+      t.selectionXY.end.xValue = r.x, t.selectionXY.end.yValue = r.y, e.update();
+      const u = e?.config?.options?.plugins?.selectdrag?.onSelectComplete;
+      if (u) {
+        const { start: x, end: Y } = t.selectionXY, m = Math.abs(x.x - Y.x), b = Math.abs(x.y - Y.y), g = e?.config?.options?.plugins?.selectdrag?.threshold || 10;
+        if (m < g || b < g)
           return;
-        y({
+        u({
           range: [
-            s.selectionXY.start.axisValue,
-            s.selectionXY.end.axisValue
+            t.selectionXY.start.axisValue,
+            t.selectionXY.end.axisValue
           ],
           boundingBox: [
-            s.selectionXY.start,
+            t.selectionXY.start,
             [
-              s.selectionXY.end.x,
-              s.selectionXY.start.y
+              t.selectionXY.end.x,
+              t.selectionXY.start.y
             ],
-            s.selectionXY.end,
+            t.selectionXY.end,
             [
-              s.selectionXY.start.x,
-              s.selectionXY.end.y
+              t.selectionXY.start.x,
+              t.selectionXY.end.y
             ]
           ],
           coordinates: {
             start: {
-              x: s.selectionXY.start.xValue,
-              y: s.selectionXY.start.yValue
+              x: t.selectionXY.start.xValue,
+              y: t.selectionXY.start.yValue
             },
             end: {
-              x: s.selectionXY.end.xValue,
-              y: s.selectionXY.end.yValue
+              x: t.selectionXY.end.xValue,
+              y: t.selectionXY.end.yValue
             }
           }
         });
       }
-    }), n.addEventListener("mousemove", (t) => {
-      var d;
-      const s = Y(e);
-      !s || ((d = s == null ? void 0 : s.selectionXY) == null ? void 0 : d.state) == "none" || e.canvas == null || (s.selectionXY.state == "mousedown" && l(t) != null && (s.selectionXY.state = "drag"), s.selectionXY.end = { x: t.offsetX, y: t.offsetY }, e.render(), r(e, s));
+    }), o.addEventListener("mousemove", (s) => {
+      const t = X(e);
+      !t || t?.selectionXY?.state == "none" || e.canvas == null || (t.selectionXY.state == "mousedown" && a(s) != null && (t.selectionXY.state = "drag"), t.selectionXY.end = { x: s.offsetX, y: s.offsetY }, e.render(), f(e, t));
     });
   },
-  beforeUpdate: (e, o, f) => {
-    var n, l, a, i;
-    (i = (a = (l = (n = e == null ? void 0 : e.config) == null ? void 0 : n.options) == null ? void 0 : l.plugins) == null ? void 0 : a.selectdrag) != null && i.enabled;
+  beforeUpdate: (e, n, l) => {
+    e?.config?.options?.plugins?.selectdrag?.enabled;
   },
-  afterDraw: (e, o, f) => {
-    var a, i, u, c, t, s, d, x;
-    const n = Y(e);
-    if (!n || ((a = n == null ? void 0 : n.selectionXY) == null ? void 0 : a.state) == "none" && !((i = n.selectionXY.end) != null && i.x))
+  afterDraw: (e, n, l) => {
+    const o = X(e);
+    if (!o || o?.selectionXY?.state == "none" && !o.selectionXY.end?.x)
       return;
-    const { ctx: l } = e;
-    l.save(), l.globalCompositeOperation = "destination-over", l.fillStyle = N.colors.selection, l.fillRect(
-      ((u = n.selectionXY.start) == null ? void 0 : u.x) || 0,
-      ((c = n.selectionXY.start) == null ? void 0 : c.y) || e.chartArea.top,
-      (((t = n.selectionXY.end) == null ? void 0 : t.x) || 0) - (((s = n.selectionXY.start) == null ? void 0 : s.x) || 0),
-      ((d = n.selectionXY.end) == null ? void 0 : d.y) - ((x = n.selectionXY.start) == null ? void 0 : x.y) || 0
-    ), l.restore();
+    const { ctx: a } = e;
+    a.save(), a.globalCompositeOperation = "destination-over", a.fillStyle = v.colors.selection, a.fillRect(
+      o.selectionXY.start?.x || 0,
+      o.selectionXY.start?.y || e.chartArea.top,
+      (o.selectionXY.end?.x || 0) - (o.selectionXY.start?.x || 0),
+      o.selectionXY.end?.y - o.selectionXY.start?.y || 0
+    ), a.restore();
   },
-  setSelection: (e, o = []) => {
+  setSelection: (e, n = []) => {
     if (e.data.labels.length === 0 || e.data.datasets.length === 0)
       return;
-    o.length === 0 && (r(e, null), e.update());
-    const f = {
+    n.length === 0 && (f(e, null), e.update());
+    const l = {
       selectionXY: {
         state: "none"
       }
-    }, n = e.data.labels.findIndex((a) => a === o[0]);
-    f.selectionXY.start = {
-      axisValue: o[0],
-      axisIndex: n,
-      x: e.scales.x.getPixelForValue(e.data.labels[n]),
+    }, o = e.data.labels.findIndex((s) => s === n[0]);
+    l.selectionXY.start = {
+      axisValue: n[0],
+      axisIndex: o,
+      x: e.scales.x.getPixelForValue(e.data.labels[o]),
       y: 0
     };
-    const l = e.data.labels.findIndex((a) => a === o[1]);
-    f.selectionXY.end = {
-      axisValue: o[0],
-      axisIndex: l,
-      x: e.scales.x.getPixelForValue(e.data.labels[l]),
+    const a = e.data.labels.findIndex((s) => s === n[1]);
+    l.selectionXY.end = {
+      axisValue: n[0],
+      axisIndex: a,
+      x: e.scales.x.getPixelForValue(e.data.labels[a]),
       y: e.chartArea.height
-    }, r(e, f), e.update();
+    }, f(e, l), e.update();
   },
   clearSelection: (e) => {
-    r(e, null), e.update();
+    f(e, null), e.update();
   }
 };
 export {
-  P as AreaSelectDrag
+  V as AreaSelectDrag
 };

@@ -7,7 +7,7 @@ import { ChartType } from "chart.js";
 
 
 const SimpleChart = <T extends ChartType>(props: ISimpleChartOptions<T>) => {
-    const currentRef = useRef<ISimpleChart<T>>();
+    const currentRef = useRef<ISimpleChart<T>>(null);
 
     const chartRef = props.chartRef || useRef<IChartJS>(null);
 
